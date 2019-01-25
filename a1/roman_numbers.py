@@ -74,11 +74,14 @@ def convert_to_roman_numeral(positive_int):
             positive_int -= 1
             answer += "I"
 
-    print(answer)
+    return answer
 
 
 def main():
-    convert_to_roman_numeral(int(input("Input positive integer: ")))
+    """
+    Drive the program.
+    """
+    print(convert_to_roman_numeral(int(input("Input positive integer: "))))
 
 
 if __name__ == "__main__":
