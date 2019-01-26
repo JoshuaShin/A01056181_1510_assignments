@@ -28,7 +28,8 @@ def time_calculator(seconds):
     minutes = seconds // 60
     seconds %= 60
 
-    return "Days:", days, "Hours:", hours, "minutes:", minutes, "seconds:", seconds
+    return [days, hours, minutes, seconds]
+    # return "Days:", days, "Hours:", hours, "minutes:", minutes, "seconds:", seconds
 
 
 def main():
