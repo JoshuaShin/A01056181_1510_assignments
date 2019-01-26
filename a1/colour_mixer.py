@@ -19,11 +19,13 @@ def color_mixer():
     if not(color[0] == "red" or color[0] == "yellow" or color[0] == "blue"):
         print("Please input a primary color!")
         color_mixer()
+        return
 
     color[1] = input("Second primary color: ").strip().lower()
     if not(color[1] == "red" or color[1] == "yellow" or color[1] == "blue"):
         print("Please input a primary color!")
         color_mixer()
+        return
 
     if color[0] == color[1]:
         print("First and second colors must be different!")
