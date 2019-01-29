@@ -32,11 +32,8 @@ def number_generator():
     return lottery_list
     """
 
-    # GOOGLE-FU ANSWER (I know enough programming to know that there's a million built in functions!)
-    lottery_list = random.sample(range(1, 49), 6)
-    lottery_list.sort()  # Hey Chris, how come if i do "return lottery_list.sort()" it returns "None"?
-
-    return lottery_list
+    # Languages have built in methods for everything I can image. I had to google the python specifics though.
+    return sorted(random.sample(range(1, 49), 6))
 
 
 def main():

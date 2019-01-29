@@ -25,7 +25,7 @@ def compound_interest(principle, annual_interest_rate, compounded_times_per_year
     RETURN return amount of money in the account according to specified input
     """
 
-    return principle * (1 + (annual_interest_rate/compounded_times_per_year)) ** (compounded_times_per_year*years)
+    return principle * (1 + (annual_interest_rate / compounded_times_per_year)) ** (compounded_times_per_year * years)
 
 
 def main():

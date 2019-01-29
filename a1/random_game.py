@@ -26,7 +26,7 @@ def choice_computer_translator(choice_computer):
     elif choice_computer == 1:
         return "paper"
 
-    elif choice_computer == 2:
+    elif choice_computer == 2:  # chris, is this good practice?
         return "scissors"
 
 

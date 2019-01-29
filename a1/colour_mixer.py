@@ -14,7 +14,8 @@ def color_mixer():
     Print secondary color from two primary color inputs.
     """
 
-    color = ["", ""]
+    color = ["color_1", "color_2"]
+
     color[0] = input("First primary color: ").strip().lower()
     if not(color[0] == "red" or color[0] == "yellow" or color[0] == "blue"):
         print("Please input a primary color!")
