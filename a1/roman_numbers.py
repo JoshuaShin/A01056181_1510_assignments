@@ -21,58 +21,44 @@ def convert_to_roman_numeral(positive_int):
 
     answer = ""
 
-    while positive_int > 0:
-        if positive_int // 1000 > 0:
-            positive_int -= 1000
-            answer += "M"
+    answer += "M" * (positive_int // 1000)
+    positive_int %= 1000
 
-        elif positive_int // 900 > 0:
-            positive_int -= 900
-            answer += "CM"
+    answer += "CM" * (positive_int // 900)
+    positive_int %= 900
 
-        elif positive_int // 500 > 0:
-            positive_int -= 500
-            answer += "D"
+    answer += "D" * (positive_int // 500)
+    positive_int %= 500
 
-        elif positive_int // 400 > 0:
-            positive_int -= 400
-            answer += "CD"
+    answer += "CD" * (positive_int // 400)
+    positive_int %= 400
 
-        elif positive_int // 100 > 0:
-            positive_int -= 100
-            answer += "C"
+    answer += "C" * (positive_int // 100)
+    positive_int %= 100
 
-        elif positive_int // 90 > 0:
-            positive_int -= 90
-            answer += "XC"
+    answer += "XC" * (positive_int // 90)
+    positive_int %= 90
 
-        elif positive_int // 50 > 0:
-            positive_int -= 50
-            answer += "L"
+    answer += "L" * (positive_int // 50)
+    positive_int %= 50
 
-        elif positive_int // 40 > 0:
-            positive_int -= 40
-            answer += "XL"
+    answer += "XL" * (positive_int // 40)
+    positive_int %= 40
 
-        elif positive_int // 10 > 0:
-            positive_int -= 10
-            answer += "X"
+    answer += "X" * (positive_int // 10)
+    positive_int %= 10
 
-        elif positive_int // 9 > 0:
-            positive_int -= 9
-            answer += "IX"
+    answer += "IX" * (positive_int // 9)
+    positive_int %= 9
 
-        elif positive_int // 5 > 0:
-            positive_int -= 5
-            answer += "V"
+    answer += "V" * (positive_int // 5)
+    positive_int %= 5
 
-        elif positive_int // 4 > 0:
-            positive_int -= 4
-            answer += "IV"
+    answer += "IV" * (positive_int // 4)
+    positive_int %= 4
 
-        elif positive_int // 1 > 0:
-            positive_int -= 1
-            answer += "I"
+    answer += "I" * (positive_int // 1)
+    positive_int %= 1
 
     return answer
 
