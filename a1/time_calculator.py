@@ -29,7 +29,6 @@ def time_calculator(seconds):
     seconds %= 60
 
     return [days, hours, minutes, seconds]
-    # return "Days:", days, "Hours:", hours, "minutes:", minutes, "seconds:", seconds
 
 
 def main():
