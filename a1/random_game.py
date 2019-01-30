@@ -72,6 +72,7 @@ def main():
     """
     Drive the program.
     """
+
     rock_paper_scissors()
 
 

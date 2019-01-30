@@ -35,6 +35,7 @@ def main():
     """
     Drive the program.
     """
+
     print(time_calculator(int(input("Input seconds: "))))
 
 

@@ -18,8 +18,9 @@ def letter_to_number(character):
     POST-CONDITION find the number in string equivalent of the input alphabet character
     RETURN corresponding number of alphabet character in string
     """
-
-    if character == "a" or character == "b" or character == "c":
+    if character.isdigit():
+        return character
+    elif character == "a" or character == "b" or character == "c":
         return "2"
     elif character == "d" or character == "e" or character == "f":
         return "3"
@@ -46,19 +47,10 @@ def number_translator():
     RETURN translated phone number with letters to all numbers
     """
 
-    """
-    for i in range(len(phone_number)):
-        if phone_number[i] == "-":
-            continue
-        elif phone_number[i].isalpha():
-            phone_number = phone_number[0:i] + letter_to_number(phone_number[i]) + phone_number[i+1:len(phone_number)]
-    return phone_number
-    """
-
     phone_number = input("Enter a phone number in the format XXX-XXX-XXXX: ")
-
     translated_number = ""
 
+    # Only if there was some way to make this LOOP...
     translated_number += letter_to_number(phone_number[0])
     translated_number += letter_to_number(phone_number[1])
     translated_number += letter_to_number(phone_number[2])
