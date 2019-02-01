@@ -18,13 +18,13 @@ def color_mixer():
     primary_color = ["red", "yellow", "blue"]
 
     color[0] = input("First primary color: ").strip().lower()
-    if not(color[0] in primary_color):
+    if color[0] not in primary_color:
         print("Please input a primary color!")
         color_mixer()
         return
 
     color[1] = input("Second primary color: ").strip().lower()
-    if not(color[1] in primary_color):
+    if color[1] not in primary_color:
         print("Please input a primary color!")
         color_mixer()
         return
