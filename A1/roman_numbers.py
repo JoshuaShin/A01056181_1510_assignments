@@ -8,6 +8,8 @@ Take a number between 1- 10,000 as input and return the roman numeral equivalent
 # A01056181
 # Jan 24 2019
 
+import doctest
+
 
 """
 roman_number = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
@@ -35,6 +37,13 @@ def convert_to_roman_numeral(positive_int):
     PRE-CONDITION positive int must be a positive integer
     POST-CONDITION find the roman numeral equivalent of the input positive integer
     RETURN roman numeral equivalent of the input positive integer
+
+    >>> convert_to_roman_numeral(1)
+    'I'
+    >>> convert_to_roman_numeral(10000)
+    'MMMMMMMMMM'
+    >>> convert_to_roman_numeral(4999)
+    'MMMMCMXCIX'
     """
 
     answer = ""
@@ -86,6 +95,7 @@ def main():
     Drive the program.
     """
 
+    doctest.testmod()
     print(convert_to_roman_numeral(int(input("Input positive integer: "))))
 
 

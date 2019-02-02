@@ -8,6 +8,8 @@ Return amount of money in the account according to specified input.
 # A01056181
 # Jan 25 2019
 
+import doctest
+
 
 def compound_interest(principle, annual_interest_rate, compounded_times_per_year, years):
     """
@@ -23,6 +25,13 @@ def compound_interest(principle, annual_interest_rate, compounded_times_per_year
     PRE-CONDITION years must be a positive float
     POST-CONDITION find amount of money in the account according to specified input
     RETURN return amount of money in the account according to specified input
+
+    >>> compound_interest(0, 0, 1, 0)
+    0.0
+    >>> compound_interest(1.0, 1.0, 1, 1.0)
+    2.0
+    >>> compound_interest(100.0, 0.1, 4, 100.0)
+    1947808.0514961318
     """
 
     return principle * (1 + (annual_interest_rate / compounded_times_per_year)) ** (compounded_times_per_year * years)
@@ -32,6 +41,8 @@ def main():
     """
     Drive the program.
     """
+
+    doctest.testmod()
     print(compound_interest(float(input("Principal: ")),
                             float(input("Annual interest rate: ")),
                             int(input("Compounded times per year: ")),

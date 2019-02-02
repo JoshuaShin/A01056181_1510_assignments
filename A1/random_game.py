@@ -8,6 +8,7 @@ Play a game of rock paper scissors with the computer.
 # A01056181
 # Jan 25 2019
 
+import doctest
 import random
 
 
@@ -18,6 +19,13 @@ def choice_computer_translator(choice_computer):
     PRE-CONDITION choice_computer must be int between 0 - 2
     POST-CONDITION translate computer choice to "rock", "paper", or "scissors"
     RETURN return computer choice in "rock", "paper", or "scissors"
+
+    >>> choice_computer_translator(0)
+    'rock'
+    >>> choice_computer_translator(1)
+    'paper'
+    >>> choice_computer_translator(2)
+    'scissors'
     """
 
     if choice_computer == 0:
@@ -26,7 +34,7 @@ def choice_computer_translator(choice_computer):
     elif choice_computer == 1:
         return "paper"
 
-    elif choice_computer == 2:  # chris, is this good practice?
+    else:  # choice_computer == 2
         return "scissors"
 
 
@@ -73,6 +81,7 @@ def main():
     Drive the program.
     """
 
+    doctest.testmod()
     rock_paper_scissors()
 
 

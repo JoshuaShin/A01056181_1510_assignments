@@ -1,5 +1,5 @@
 from unittest import TestCase
-from .roman_numbers import convert_to_roman_numeral
+from roman_numbers import convert_to_roman_numeral
 
 
 class TestConvertToRomanNumeral(TestCase):

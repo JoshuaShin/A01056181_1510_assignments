@@ -8,6 +8,8 @@ Return days, hours, minutes, seconds from given seconds.
 # A01056181
 # Jan 24 2019
 
+import doctest
+
 
 def time_calculator(seconds):
     """
@@ -17,6 +19,13 @@ def time_calculator(seconds):
     PRE-CONDITION seconds must be a positive integer
     POST-CONDITION find days, hours, minutes, seconds of the input seconds
     RETURN return days, hours, minutes, seconds of the input seconds
+
+    >>> time_calculator(0)
+    [0, 0, 0, 0]
+    >>> time_calculator(1000)
+    [0, 0, 16, 40]
+    >>> time_calculator(1000000)
+    [11, 13, 46, 40]
     """
 
     days = seconds // 86400
@@ -36,6 +45,7 @@ def main():
     Drive the program.
     """
 
+    doctest.testmod()
     print(time_calculator(int(input("Input seconds: "))))
 
 

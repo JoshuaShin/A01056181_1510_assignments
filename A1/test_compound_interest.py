@@ -1,10 +1,10 @@
 from unittest import TestCase
-from .compound_interest import compound_interest
+from compound_interest import compound_interest
 
 
 class TestCompoundInterest(TestCase):
     def test_compound_interest_zero(self):
-        self.assertEqual(0, compound_interest(0, 0, 1, 0))
+        self.assertEqual(0.0, compound_interest(0, 0, 1, 0))
 
     def test_compound_interest_low(self):
         self.assertEqual(2.0, compound_interest(1.0, 1.0, 1, 1.0))

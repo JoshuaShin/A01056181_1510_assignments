@@ -8,6 +8,8 @@ Translate a phone number with letters to all numbers.
 # A01056181
 # Jan 25 2019
 
+import doctest
+
 
 def letter_to_number(character):
     """
@@ -17,6 +19,15 @@ def letter_to_number(character):
     PRE-CONDITION character must be a an alphabet character
     POST-CONDITION find the number in string equivalent of the input alphabet character
     RETURN corresponding number of alphabet character in string
+
+    >>> letter_to_number("a")
+    2
+    >>> letter_to_number("z")
+    9
+    >>> letter_to_number("-")
+    -
+    >>> letter_to_number(5)
+    5
     """
     if character.isdigit():
         return character
@@ -72,6 +83,7 @@ def main():
     Drive the program.
     """
 
+    doctest.testmod()
     print("Translated number:", number_translator())
 
 
