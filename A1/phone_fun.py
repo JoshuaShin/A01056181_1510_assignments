@@ -13,7 +13,7 @@ import doctest
 
 def letter_to_number(character):
     """
-    Take phone number character and return corresponding number in string.
+    Take a character and return corresponding number in string.
 
     PARAM character is an alphabet character
     PRE-CONDITION character must be a an alphabet character
@@ -21,14 +21,15 @@ def letter_to_number(character):
     RETURN corresponding number of alphabet character in string
 
     >>> letter_to_number("a")
-    2
+    '2'
     >>> letter_to_number("z")
-    9
+    '9'
     >>> letter_to_number("-")
-    -
-    >>> letter_to_number(5)
-    5
+    '-'
+    >>> letter_to_number('5')
+    '5'
     """
+
     if character.isdigit():
         return character
     elif character == "a" or character == "b" or character == "c":

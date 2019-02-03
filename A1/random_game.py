@@ -12,19 +12,20 @@ import doctest
 import random
 
 
-def choice_computer_translator(choice_computer):
+def computer_choice_translator(choice_computer):
     """
     Translate computer choice (int between 0 - 2 inclusive) to "rock", "paper", or "scissors".
+
     PARAM choice_computer int between 0 - 2
     PRE-CONDITION choice_computer must be int between 0 - 2
     POST-CONDITION translate computer choice to "rock", "paper", or "scissors"
     RETURN return computer choice in "rock", "paper", or "scissors"
 
-    >>> choice_computer_translator(0)
+    >>> computer_choice_translator(0)
     'rock'
-    >>> choice_computer_translator(1)
+    >>> computer_choice_translator(1)
     'paper'
-    >>> choice_computer_translator(2)
+    >>> computer_choice_translator(2)
     'scissors'
     """
 
@@ -43,7 +44,7 @@ def rock_paper_scissors():
     Play a game of rock paper scissors with the computer.
     """
 
-    choice_computer = choice_computer_translator(random.randint(0, 2))
+    choice_computer = computer_choice_translator(random.randint(0, 2))
     choice_player = input("Ready? Rock, paper, scissors!: ").strip().lower()
 
     if not(choice_player == "rock" or choice_player == "paper" or choice_player == "scissors"):

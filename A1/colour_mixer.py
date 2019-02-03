@@ -1,7 +1,7 @@
 """
 colour_mixer.py
 
-Print secondary color from two primary color inputs.
+Print secondary colour from two primary colour inputs.
 """
 
 # Joshua Shin
@@ -11,58 +11,88 @@ Print secondary color from two primary color inputs.
 import doctest
 
 
-def color_combinations(colors_chosen):
+def is_primary_colour(colour_chosen):
     """
-    Take a string list of two unique primary colors as input and return the corresponding secondary color.
+    Take a string as input and return True if one of three primary colours.
 
-    PARAM list of strings length two holding two unique primary colors
-    PRE-CONDITION list of strings must hold two unique primary colors
-    POST-CONDITION find the corresponding secondary color
-    RETURN the corresponding secondary color
+    PARAM string
+    PRE-CONDITION colour_chosen is a string
+    POST-CONDITION find out if colour_chosen is primary colour or not
+    RETURN True if primary colour and False if else
 
-    >>> color_combinations(["red", "blue"])
+    >>> is_primary_colour("red")
+    True
+    >>> is_primary_colour("yellow")
+    True
+    >>> is_primary_colour("blue")
+    True
+    >>> is_primary_colour("white")
+    False
+    """
+
+    primary_colour = ["red", "yellow", "blue"]
+
+    if colour_chosen in primary_colour:
+        return True
+
+    else:
+        return False
+
+
+def get_secondary_colour(color_1, color_2):
+    """
+    Take two strings of two unique primary colours as input and return the corresponding secondary colour.
+
+    PARAM unique primary colour one
+    PARAM unique primary colour two
+    PRE-CONDITION string must be unique primary colour
+    PRE-CONDITION string must be unique primary colour
+    POST-CONDITION find the corresponding secondary colour
+    RETURN the corresponding secondary colour
+
+    >>> get_secondary_colour("red", "blue")
     'purple'
-    >>> color_combinations(["yellow", "red"])
+    >>> get_secondary_colour("yellow", "red")
     'orange'
-    >>> color_combinations(["blue", "yellow"])
+    >>> get_secondary_colour("blue", "yellow")
     'green'
     """
 
-    if "red" in colors_chosen and "blue" in colors_chosen:
+    colours_chosen = [color_1, color_2]
+
+    if "red" in colours_chosen and "blue" in colours_chosen:
         return "purple"
 
-    elif "red" in colors_chosen and "yellow" in colors_chosen:
+    elif "red" in colours_chosen and "yellow" in colours_chosen:
         return "orange"
 
-    else:  # "yellow" in colors_chosen and "blue" in colors_chosen
+    else:
         return "green"
 
 
-def color_mixer():
+def colour_mixer():
     """
-    Print secondary color from two primary color inputs.
+    Print secondary colour from two primary colour inputs.
     """
 
-    colors_chosen = ["color_1", "color_2"]
-    primary_color = ["red", "yellow", "blue"]
-
-    colors_chosen[0] = input("First primary color: ").strip().lower()
-    if colors_chosen[0] not in primary_color:
-        print("Please input a primary color!")
-        color_mixer()
+    colour_chosen_1 = input("First primary colour: ").strip().lower()
+    if not is_primary_colour(colour_chosen_1):
+        print("Please input a primary colour!")
+        colour_mixer()
         return
 
-    colors_chosen[1] = input("Second primary color: ").strip().lower()
-    if colors_chosen[1] not in primary_color:
-        print("Please input a primary color!")
-        color_mixer()
+    colour_chosen_2 = input("Second primary colour: ").strip().lower()
+    if not is_primary_colour(colour_chosen_2):
+        print("Please input a primary colour!")
+        colour_mixer()
         return
 
-    if colors_chosen[0] == colors_chosen[1]:
-        print("First and second colors must be different!")
-        color_mixer()
+    if colour_chosen_1 == colour_chosen_2:
+        print("First and second colours must be different!")
+        colour_mixer()
+        return
 
-    print("Secondary color:", color_combinations(colors_chosen))
+    print("Secondary colour:", get_secondary_colour(colour_chosen_1, colour_chosen_2))
 
 
 def main():
@@ -71,7 +101,7 @@ def main():
     """
 
     doctest.testmod()
-    color_mixer()
+    colour_mixer()
 
 
 if __name__ == "__main__":

@@ -11,32 +11,14 @@ Take a number between 1- 10,000 as input and return the roman numeral equivalent
 import doctest
 
 
-"""
-roman_number = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
-roman_letter = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
-
-
-def convert_to_roman_numeral_recursively(positive_int):
-    if not positive_int:
-        return ""
-
-    else:
-        answer = roman_letter[0] * (positive_int // roman_number[0])
-        positive_int %= roman_number[0]
-        roman_number.pop(0)
-        roman_letter.pop(0)
-        return answer + convert_to_roman_numeral_recursively(positive_int)
-"""
-
-
 def convert_to_roman_numeral(positive_int):
     """
     Take a number between 1- 10,000 as input and return the roman numeral equivalent.
 
-    PARAM positive_int is a positive integer
-    PRE-CONDITION positive int must be a positive integer
-    POST-CONDITION find the roman numeral equivalent of the input positive integer
-    RETURN roman numeral equivalent of the input positive integer
+    PARAM: positive_int is a positive integer
+    PRE-CONDITION: positive int must be a positive integer
+    POST-CONDITION: find the roman numeral equivalent of the input positive integer
+    RETURN: roman numeral equivalent of the input positive integer
 
     >>> convert_to_roman_numeral(1)
     'I'
