@@ -13,20 +13,10 @@ from lotto import number_generator
 
 
 class TestNumberGenerator(TestCase):
-    """
-    Test number_generator function.
-    """
-
     def test_number_generator_length(self):
-        """
-        Test length is 6.
-        """
         self.assertEqual(6, len(number_generator()))
 
     def test_number_generator_integer(self):
-        """
-        Test list items are integers.
-        """
         random_numbers = number_generator()
         self.assertTrue(random_numbers[0] == int(random_numbers[0]) and
                         random_numbers[1] == int(random_numbers[1]) and
@@ -36,22 +26,13 @@ class TestNumberGenerator(TestCase):
                         random_numbers[5] == int(random_numbers[5]))
 
     def test_number_generator_unique(self):
-        """
-        Test list items are unique.
-        """
         self.assertEqual(6, len(set(number_generator())))
 
     def test_number_generator_sorted(self):
-        """
-        Test list is sorted.
-        """
         random_numbers = number_generator()
         self.assertEqual(sorted(random_numbers), random_numbers)
 
     def test_number_generator_range(self):
-        """
-        Test list items are within range 1 to 49.
-        """
         lotto_range = [1, 2, 3, 4, 5, 6, 7, 8, 9,
                        10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
                        20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
