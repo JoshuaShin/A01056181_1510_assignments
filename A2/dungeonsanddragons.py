@@ -70,13 +70,19 @@ def create_name(length):
 
 
 def choose_class():
-    class_list = ["barbarian", "bard", "cleric", "druid", "fight", "monk", "paladin",
+    class_list = ["barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin",
                   "ranger", "rogue", "sorcerer", "warlock", "wizard", "blood hunter"]
-    chosen_class = input(str(class_list) + "Pick a class from from the list: ").strip().lower()
+    chosen_class = input(str(class_list) + "\nPick a class: ").strip().lower()
     if chosen_class in class_list:
         return chosen_class
     else:
-        choose_class()
+        return choose_class()
+
+
+def assign_health(chosen_class):
+    class_hp_roll = {"barbarian": 12, "bard": 8, "cleric": 8, "druid": 8, "fighter": 10, "monk": 8, "paladin": 10,
+                     "ranger": 10, "rogue": 8, "sorcerer": 6, "warlock": 8, "wizard": 6, "blood hunter": 10}
+    return roll_die(1, class_hp_roll[chosen_class])
 
 
 def create_character(name_length):
@@ -92,11 +98,10 @@ def create_character(name_length):
         print("WARNING: name length must be positive integer!")
         return None
     else:
-        # Name
-        character = {"Name": create_name(name_length)}
+        player_class = choose_class()
 
-        # Class
-        character["Class"] = choose_class()
+        # Name & Class & HP
+        character = {"Name": generate_name(name_length), "Class": player_class, "HP": assign_health(player_class)}
 
         # Attributes
         attributes = ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]
@@ -108,10 +113,6 @@ def create_character(name_length):
 
         # Inventory
         character["Inventory"] = []
-
-
-
-
 
         return character
 
@@ -126,12 +127,15 @@ def print_character(character):
     """
 
     print("--------------------")
-    print("Name:", character[0])
-    for i in range(1, len(character)):
-        if len(character[i]) == 2:
-            print(character[i][0] + ":", character[i][1])
-        else:
-            print("Item", str(i - 6) + ":", character[i])
+    for key, value in character.items():
+        print(key, value)
+    #
+    # print("Name:", character[0])
+    # for i in range(1, len(character)):
+    #     if len(character[i]) == 2:
+    #         print(character[i][0] + ":", character[i][1])
+    #     else:
+    #         print("Item", str(i - 6) + ":", character[i])
 
 
 def print_inventory(inventory):
@@ -151,30 +155,45 @@ def print_inventory(inventory):
 
 def generate_consonant():
     """
+    Return a consonant.
 
+    RETURN a consonant
     """
+
     return random.choice("bcdfghjklmnpqrstvwxyz")
 
 
 def generate_vowel():
     """
+    Return a vowel.
 
+    RETURN a vowel
     """
+
     return random.choice("aeiouy")
 
 
 def generate_syllable():
     """
+    Return a syllable made of a consonant and vowel.
 
+    RETURN a syllable made of a consonant and vowel
     """
+
     return generate_consonant() + generate_vowel()
 
 
 def generate_name(syllables):
     """
+    Return a random name of length syllables * 2 by generating syllables made of a consonant and vowel.
 
+    PARAM positive integer
+    PRE-CONDITION integer must be positive
+    RETURN a random name of length syllables * 2
     """
+
     name = ""
+
     for i in range(syllables):
         name += generate_syllable()
     return name.title()
@@ -187,7 +206,7 @@ def main():
 
     doctest.testmod()
 
-    print(generate_name(5))
+    print_character(create_character(int(input("Number of syllables in name: "))))
 
 
 if __name__ == "__main__":
