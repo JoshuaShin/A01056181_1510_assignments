@@ -12,6 +12,10 @@ import random
 import doctest
 
 
+def CHARACTER_CLASS():
+    return {"barbarian": 12, "bard": 8, "cleric": 8, "druid": 8, "fighter": 10, "monk": 8, "paladin": 10,
+            "ranger": 10, "rogue": 8, "sorcerer": 6, "warlock": 8, "wizard": 6, "blood hunter": 10}
+
 def roll_die(number_of_rolls, number_of_sides):
     """
     Simulate rolling a die of the specified size the specified number of times.
@@ -70,19 +74,20 @@ def create_name(length):
 
 
 def choose_class():
-    class_list = ["barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin",
-                  "ranger", "rogue", "sorcerer", "warlock", "wizard", "blood hunter"]
-    chosen_class = input(str(class_list) + "\nPick a class: ").strip().lower()
-    if chosen_class in class_list:
+    print("Class list:")
+    for key in CHARACTER_CLASS().keys():
+        print(key)
+
+    chosen_class = input("Choose a class: ").strip().lower()
+
+    if chosen_class in CHARACTER_CLASS().keys():
         return chosen_class
     else:
         return choose_class()
 
 
 def assign_health(chosen_class):
-    class_hp_roll = {"barbarian": 12, "bard": 8, "cleric": 8, "druid": 8, "fighter": 10, "monk": 8, "paladin": 10,
-                     "ranger": 10, "rogue": 8, "sorcerer": 6, "warlock": 8, "wizard": 6, "blood hunter": 10}
-    return roll_die(1, class_hp_roll[chosen_class])
+    return roll_die(1, CHARACTER_CLASS()[chosen_class])
 
 
 def create_character(name_length):
@@ -199,6 +204,83 @@ def generate_name(syllables):
     return name.title()
 
 
+def combat_initiative(opponent_one, opponent_two):
+    """
+    Process a single round of combat between two characters.
+
+    PARAM character dictionary object
+    PARAM character dictionary object
+    PRE-CONDITION both parameters are well-formed dictionaries each containing a correct character
+    RETURN name of character who gets initiative
+    """
+
+    opponent_one_initiative = roll_die(1, 20)
+    opponent_two_initiative = roll_die(1, 20)
+
+    print("Checking initiative...")
+    print(opponent_one["Name"], "rolls", opponent_one_initiative)
+    print(opponent_two["Name"], "rolls", opponent_two_initiative)
+
+    if opponent_one_initiative == opponent_two_initiative:
+        print("Tied. Re-roll...")
+        return combat_initiative(opponent_one, opponent_two)
+
+    elif opponent_one_initiative > opponent_two_initiative:
+        print(opponent_one["Name"], "gets initiative.")
+        return opponent_one, opponent_two
+
+    else:
+        print(opponent_two["Name"], "gets initiative.")
+        return opponent_two, opponent_one
+
+
+def combat_attack(attacker, defender):
+    """
+    Process the attacker's attack to defender's defense.
+
+    PARAM character dictionary object
+    PARAM character dictionary object
+    PRE-CONDITION both parameters are well-formed dictionaries each containing a correct character
+    POST-CONDITION if attack is successful, modify defender's health according to attacker damage
+    """
+
+    first_attacker_accuracy = roll_die(1, 20)
+    print(attacker["Name"], "rolls accuracy", first_attacker_accuracy)
+    print(defender["Name"] + "'s dexterity is", defender["Dexterity"])
+
+    if first_attacker_accuracy > defender["Dexterity"]:
+        damage = roll_die(1, CHARACTER_CLASS()[attacker["Class"]])
+        defender["HP"] -= damage
+        print(attacker["Name"], "hits", defender["Name"], "for", damage, "damage!")
+    else:
+        print(attacker["Name"], "misses!")
+
+
+def combat_round(opponent_one, opponent_two):
+    """
+    Process a single round of combat between two characters.
+
+    PARAM character dictionary object
+    PARAM character dictionary object
+    PRE-CONDITION both parameters are well-formed dictionaries each containing a correct character
+    POST-CONDITION a single round of combat between two characters are processed
+    """
+
+    print("----- START COMBAT -----")
+
+    opponent_one, opponent_two = combat_initiative(opponent_one, opponent_two)
+    print(opponent_one["Name"], "HP", opponent_one["HP"])
+    print(opponent_two["Name"], "HP", opponent_two["HP"])
+
+    combat_attack(opponent_one, opponent_two)
+    combat_attack(opponent_two, opponent_one)
+
+    print(opponent_one["Name"], "HP", opponent_one["HP"])
+    print(opponent_two["Name"], "HP", opponent_two["HP"])
+
+    print("----- END COMBAT -----")
+
+
 def main():
     """
     Drive the program.
@@ -206,7 +288,8 @@ def main():
 
     doctest.testmod()
 
-    print_character(create_character(int(input("Number of syllables in name: "))))
+    # print_character(create_character(int(input("Number of syllables in name: "))))
+    combat_round(create_character(1), create_character(1))
 
 
 if __name__ == "__main__":
