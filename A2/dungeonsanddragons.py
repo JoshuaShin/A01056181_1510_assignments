@@ -16,6 +16,7 @@ def CHARACTER_CLASS():
     return {"barbarian": 12, "bard": 8, "cleric": 8, "druid": 8, "fighter": 10, "monk": 8, "paladin": 10,
             "ranger": 10, "rogue": 8, "sorcerer": 6, "warlock": 8, "wizard": 6, "blood hunter": 10}
 
+
 def roll_die(number_of_rolls, number_of_sides):
     """
     Simulate rolling a die of the specified size the specified number of times.
@@ -74,7 +75,7 @@ def create_name(length):
 
 
 def choose_class():
-    print("Class list:")
+    print("CLASS LIST:")
     for key in CHARACTER_CLASS().keys():
         print(key)
 
@@ -132,15 +133,14 @@ def print_character(character):
     """
 
     print("--------------------")
+    print("CHARACTER INFO:")
     for key, value in character.items():
-        print(key, value)
-    #
-    # print("Name:", character[0])
-    # for i in range(1, len(character)):
-    #     if len(character[i]) == 2:
-    #         print(character[i][0] + ":", character[i][1])
-    #     else:
-    #         print("Item", str(i - 6) + ":", character[i])
+        if key == "Inventory":
+            for item in character["Inventory"]:
+                print("Item", item)
+        else:
+            print(key, value)
+    print("--------------------")
 
 
 def print_inventory(inventory):
@@ -152,7 +152,8 @@ def print_inventory(inventory):
     POST-CONDITION items in inventory
     """
 
-    print("Supply Shop:")
+    print("--------------------")
+    print("SUPPLY SHOP:")
     for i in range(len(inventory)):
         print(inventory[i])
     print("--------------------")
@@ -252,6 +253,7 @@ def combat_attack(attacker, defender):
         damage = roll_die(1, CHARACTER_CLASS()[attacker["Class"]])
         defender["HP"] -= damage
         print(attacker["Name"], "hits", defender["Name"], "for", damage, "damage!")
+
     else:
         print(attacker["Name"], "misses!")
 
@@ -266,7 +268,7 @@ def combat_round(opponent_one, opponent_two):
     POST-CONDITION a single round of combat between two characters are processed
     """
 
-    print("----- START COMBAT -----")
+    print("START COMBAT ROUND:")
 
     opponent_one, opponent_two = combat_initiative(opponent_one, opponent_two)
     print(opponent_one["Name"], "HP", opponent_one["HP"])
@@ -278,18 +280,55 @@ def combat_round(opponent_one, opponent_two):
     print(opponent_one["Name"], "HP", opponent_one["HP"])
     print(opponent_two["Name"], "HP", opponent_two["HP"])
 
-    print("----- END COMBAT -----")
-
 
 def main():
     """
-    Drive the program.
+    Demonstrate D&D.
     """
 
     doctest.testmod()
 
+    # Print supply shop
+    sample_inventory = ["Map", "Sword", "Bow", "Potion", "Scroll", "Shield", "Bread", "Water"]
+    print_inventory(sample_inventory)
+
+    # Build character 1
+    print("CREATE CHARACTER 1:")
+    input_name_length = int(input("Enter number of syllables in name: "))
+    input_item_amount = int(input("Enter item amount (less than 8): "))
+    character_1 = create_character(input_name_length)
+    inventory = choose_inventory(sample_inventory, input_item_amount)
+    character_1["Inventory"] = inventory
+    print_character(character_1)
+
+    # Build character 2
+    print("CREATE CHARACTER 2:")
+    input_name_length = int(input("Enter number of syllables in name: "))
+    input_item_amount = int(input("Enter item amount (less than 8): "))
+    character_2 = create_character(input_name_length)
+    inventory = choose_inventory(sample_inventory, input_item_amount)
+    character_2["Inventory"] = inventory
+    print_character(character_2)
+
     # print_character(create_character(int(input("Number of syllables in name: "))))
-    combat_round(create_character(1), create_character(1))
+    combat_round(character_1, character_2)
+
+    # Demonstrate create_name()
+    print("--------------------")
+    print("NAME GEN DEMO:")
+
+    for i in range(1, 10):
+        print(generate_name(i))
+
+    # Demonstrate roll_die()
+    print("--------------------")
+    print("DICE ROLL DEMO:")
+    print("Sum of 1 roll 1 sided die:", roll_die(1, 1))
+    print("Sum of 6 rolls 1 sided die:", roll_die(6, 1))
+    print("Sum of 1 roll 6 sided die:", roll_die(1, 6))
+    print("Sum of 1 roll 6 sided die:", roll_die(1, 6))
+    print("Sum of 6 rolls 6 sided die:", roll_die(6, 6))
+    print("Sum of 6 rolls 6 sided die:", roll_die(6, 6))
 
 
 if __name__ == "__main__":
