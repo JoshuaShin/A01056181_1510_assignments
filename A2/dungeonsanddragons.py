@@ -1,5 +1,5 @@
 """
-lab_04.py
+dungeonsanddragons.py
 
 Collection of Dungeons & Dragons functions.
 """
@@ -13,6 +13,12 @@ import doctest
 
 
 def CHARACTER_CLASS():
+    """
+    Return a dictionary of D&D characters and their corresponding health die.
+
+    RETURN a dictionary of D&D characters and their corresponding health die
+    """
+
     return {"barbarian": 12, "bard": 8, "cleric": 8, "druid": 8, "fighter": 10, "monk": 8, "paladin": 10,
             "ranger": 10, "rogue": 8, "sorcerer": 6, "warlock": 8, "wizard": 6, "blood hunter": 10}
 
@@ -57,21 +63,6 @@ def choose_inventory(inventory, selection):
         return inventory[:]
     else:
         return sorted(random.sample(inventory, selection))
-
-
-def create_name(length):
-    """
-    Choose random characters from a-z to create a name of given length.
-
-    PARAM positive integer
-    PRE-CONDITION integer must be positive
-    RETURN random name of given length
-    """
-
-    if type(length) != int or length < 1:
-        return None
-    else:
-        return "".join(random.sample(list("abcdefghijklmnopqrstuvwxyz"), length)).title()
 
 
 def choose_class():
@@ -161,9 +152,9 @@ def print_inventory(inventory):
 
 def generate_consonant():
     """
-    Return a consonant.
+    Return a consonant including y.
 
-    RETURN a consonant
+    RETURN a consonant including y
     """
 
     return random.choice("bcdfghjklmnpqrstvwxyz")
@@ -171,9 +162,9 @@ def generate_consonant():
 
 def generate_vowel():
     """
-    Return a vowel.
+    Return a vowel including y.
 
-    RETURN a vowel
+    RETURN a vowel including y
     """
 
     return random.choice("aeiouy")
@@ -199,7 +190,6 @@ def generate_name(syllables):
     """
 
     name = ""
-
     for i in range(syllables):
         name += generate_syllable()
     return name.title()
@@ -258,6 +248,21 @@ def combat_attack(attacker, defender):
         print(attacker["Name"], "misses!")
 
 
+def is_alive(character):
+    """
+    Check if character is alive (HP > 0).
+
+    PARAM character dictionary object
+    PRE-CONDITION both parameters are well-formed dictionaries each containing a correct character
+    RETURN True if character is alive (HP > 0)
+    """
+
+    if character["HP"] > 0:
+        return True
+    else:
+        return False
+
+
 def combat_round(opponent_one, opponent_two):
     """
     Process a single round of combat between two characters.
@@ -270,15 +275,24 @@ def combat_round(opponent_one, opponent_two):
 
     print("START COMBAT ROUND:")
 
+    # Check initiative
     opponent_one, opponent_two = combat_initiative(opponent_one, opponent_two)
+
     print(opponent_one["Name"], "HP", opponent_one["HP"])
     print(opponent_two["Name"], "HP", opponent_two["HP"])
 
+    # Combat
     combat_attack(opponent_one, opponent_two)
     combat_attack(opponent_two, opponent_one)
 
     print(opponent_one["Name"], "HP", opponent_one["HP"])
     print(opponent_two["Name"], "HP", opponent_two["HP"])
+
+    # Check death
+    if not is_alive(opponent_one):
+        print(opponent_one["Name"], "is dead!")
+    if not is_alive(opponent_two):
+        print(opponent_two["Name"], "is dead!")
 
 
 def main():
@@ -310,13 +324,12 @@ def main():
     character_2["Inventory"] = inventory
     print_character(character_2)
 
-    # print_character(create_character(int(input("Number of syllables in name: "))))
+    # Demonstrate combat_round()
     combat_round(character_1, character_2)
 
-    # Demonstrate create_name()
+    # Demonstrate generate_name()
     print("--------------------")
     print("NAME GEN DEMO:")
-
     for i in range(1, 10):
         print(generate_name(i))
 
