@@ -40,116 +40,6 @@ def roll_die(number_of_rolls, number_of_sides):
         return random.randrange(1, number_of_sides + 1, 1) + roll_die(number_of_rolls - 1, number_of_sides)
 
 
-def choose_inventory(inventory, selection):
-    """
-    Choose selection amount from the list inventory randomly and return sorted selection.
-
-    PARAM none empty list larger than selection
-    PARAM positive integer
-    PRE-CONDITION list must not be empty and larger than selection
-    PRE-CONDITION integer must be positive
-    RETURN sorted random selections from inventory amounting to the parameter selection
-    """
-
-    if len(inventory) == 0 and selection == 0:
-        return []
-    elif selection < 0:
-        print("WARNING: Selection cannot be negative!")
-        return None
-    elif selection > len(inventory):
-        print("WARNING: Selection cannot be larger than inventory size!")
-        return None
-    elif selection == len(inventory):
-        return inventory[:]
-    else:
-        return sorted(random.sample(inventory, selection))
-
-
-def choose_class():
-    print("CLASS LIST:")
-    for key in CHARACTER_CLASS().keys():
-        print(key)
-
-    chosen_class = input("Choose a class: ").strip().lower()
-
-    if chosen_class in CHARACTER_CLASS().keys():
-        return chosen_class
-    else:
-        return choose_class()
-
-
-def assign_health(chosen_class):
-    return roll_die(1, CHARACTER_CLASS()[chosen_class])
-
-
-def create_character(name_length):
-    """
-    Create a Dungeons and Dragons character.
-
-    PARAM positive integer
-    PRE-CONDITION integer must be positive
-    RETURN random name of given length
-    """
-
-    if type(name_length) != int or name_length < 1:
-        print("WARNING: name length must be positive integer!")
-        return None
-    else:
-        player_class = choose_class()
-
-        # Name & Class & HP
-        character = {"Name": generate_name(name_length), "Class": player_class, "HP": assign_health(player_class)}
-
-        # Attributes
-        attributes = ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]
-        for i in range(len(attributes)):
-            character[attributes[i]] = roll_die(3, 6)
-
-        # XP
-        character["XP"] = 0
-
-        # Inventory
-        character["Inventory"] = []
-
-        return character
-
-
-def print_character(character):
-    """
-    Print character information.
-
-    PARAM list contains character information
-    PRE-CONDITION list contains character information in the format name followed by 6 attributes in list size 2
-    POST-CONDITION print character information
-    """
-
-    print("--------------------")
-    print("CHARACTER INFO:")
-    for key, value in character.items():
-        if key == "Inventory":
-            for item in character["Inventory"]:
-                print("Item", item)
-        else:
-            print(key, value)
-    print("--------------------")
-
-
-def print_inventory(inventory):
-    """
-    Print items in inventory.
-
-    PARAM list of string
-    PRE-CONDITION list contains strings
-    POST-CONDITION items in inventory
-    """
-
-    print("--------------------")
-    print("SUPPLY SHOP:")
-    for i in range(len(inventory)):
-        print(inventory[i])
-    print("--------------------")
-
-
 def generate_consonant():
     """
     Return a consonant including y.
@@ -193,6 +83,94 @@ def generate_name(syllables):
     for i in range(syllables):
         name += generate_syllable()
     return name.title()
+
+
+def choose_inventory(inventory, selection):
+    """
+    Choose selection amount from the list inventory randomly and return sorted selection.
+
+    PARAM none empty list larger than selection
+    PARAM positive integer
+    PRE-CONDITION list must not be empty and larger than selection
+    PRE-CONDITION integer must be positive
+    RETURN sorted random selections from inventory amounting to the parameter selection
+    """
+
+    if len(inventory) == 0 and selection == 0:
+        return []
+    elif selection < 0:
+        print("WARNING: Selection cannot be negative!")
+        return None
+    elif selection > len(inventory):
+        print("WARNING: Selection cannot be larger than inventory size!")
+        return None
+    elif selection == len(inventory):
+        return inventory[:]
+    else:
+        return sorted(random.sample(inventory, selection))
+
+
+def choose_class():
+    """
+    Prompt user for class input and return class as string if class is valid.
+
+    RETURN chosen class in string
+    """
+
+    print("CLASS LIST:")
+    for key in CHARACTER_CLASS().keys():
+        print(key)
+
+    chosen_class = input("Choose a class: ").strip().lower()
+
+    if chosen_class in CHARACTER_CLASS().keys():
+        return chosen_class
+    else:
+        return choose_class()
+
+
+def assign_health(chosen_class):
+    """
+    Calculate random health for given class.
+
+    PARAM class in string
+    PRE-CONDITION must be valid class
+    RETURN random health for given class
+    """
+
+    return roll_die(1, CHARACTER_CLASS()[chosen_class])
+
+
+def create_character(name_length):
+    """
+    Create a Dungeons and Dragons character.
+
+    PARAM positive integer
+    PRE-CONDITION integer must be positive
+    RETURN random name of given length
+    """
+
+    if type(name_length) != int or name_length < 1:
+        print("WARNING: name length must be positive integer!")
+        return None
+    else:
+        player_class = choose_class()
+
+        # Name & Class & HP
+        character = {"Name": generate_name(name_length), "Class": player_class, "HP": assign_health(player_class)}
+
+        # Attributes
+        attributes = ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]
+        for i in range(len(attributes)):
+            character[attributes[i]] = roll_die(3, 6)
+
+        # XP
+        character["XP"] = 0
+
+        # Inventory
+        character["Inventory"] = []
+
+        return character
 
 
 def combat_initiative(opponent_one, opponent_two):
@@ -293,6 +271,42 @@ def combat_round(opponent_one, opponent_two):
         print(opponent_one["Name"], "is dead!")
     if not is_alive(opponent_two):
         print(opponent_two["Name"], "is dead!")
+
+
+def print_character(character):
+    """
+    Print character information.
+
+    PARAM list contains character information
+    PRE-CONDITION list contains character information in the format name followed by 6 attributes in list size 2
+    POST-CONDITION print character information
+    """
+
+    print("--------------------")
+    print("CHARACTER INFO:")
+    for key, value in character.items():
+        if key == "Inventory":
+            for item in character["Inventory"]:
+                print("Item", item)
+        else:
+            print(key, value)
+    print("--------------------")
+
+
+def print_inventory(inventory):
+    """
+    Print items in inventory.
+
+    PARAM list of string
+    PRE-CONDITION list contains strings
+    POST-CONDITION items in inventory
+    """
+
+    print("--------------------")
+    print("SUPPLY SHOP:")
+    for i in range(len(inventory)):
+        print(inventory[i])
+    print("--------------------")
 
 
 def main():
