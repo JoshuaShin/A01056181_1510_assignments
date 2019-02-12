@@ -226,19 +226,17 @@ def combat_attack(attacker, defender):
         print(attacker["Name"], "misses!")
 
 
-def is_alive(character):
+def check_death(character):
     """
-    Check if character is alive (HP > 0).
+    Check if character is alive (HP > 0) and announce death if dead.
 
     PARAM character dictionary object
-    PRE-CONDITION both parameters are well-formed dictionaries each containing a correct character
-    RETURN True if character is alive (HP > 0)
+    PRE-CONDITION parameter is well-formed dictionaries each containing a correct character
+    POST-CONDITION announce death if character is dead
     """
 
-    if character["HP"] > 0:
-        return True
-    else:
-        return False
+    if character["HP"] <= 0:
+        print(character["Name"], "is dead!")
 
 
 def combat_round(opponent_one, opponent_two):
@@ -267,10 +265,8 @@ def combat_round(opponent_one, opponent_two):
     print(opponent_two["Name"], "HP", opponent_two["HP"])
 
     # Check death
-    if not is_alive(opponent_one):
-        print(opponent_one["Name"], "is dead!")
-    if not is_alive(opponent_two):
-        print(opponent_two["Name"], "is dead!")
+    check_death(opponent_one)
+    check_death(opponent_two)
 
 
 def print_character(character):
