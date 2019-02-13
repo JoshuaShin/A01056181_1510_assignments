@@ -4,9 +4,11 @@ dungeonsanddragons.py
 Collection of Dungeons & Dragons functions.
 """
 
+
 # Joshua Shin
 # A01056181
 # Feb 5th 2019
+
 
 import random
 import doctest

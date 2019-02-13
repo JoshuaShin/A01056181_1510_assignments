@@ -3,6 +3,7 @@ from unittest.mock import patch
 from unittest import TestCase
 from dungeonsanddragons import combat_initiative
 
+
 opponent_1 = {'Name': 'A', 'Class': 'barbarian', 'HP': 10, 'Strength': 10, 'Dexterity': 10,
               'Constitution': 10, 'Intelligence': 10, 'Wisdom': 10, 'Charisma': 10, 'XP': 0, 'Inventory': []}
 opponent_2 = {'Name': 'A', 'Class': 'barbarian', 'HP': 10, 'Strength': 10, 'Dexterity': 10,
