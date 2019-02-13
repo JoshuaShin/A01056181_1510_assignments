@@ -144,7 +144,7 @@ def assign_health(chosen_class):
 
     PARAM class in string
     PRE-CONDITION must be valid class
-    RETURN random health for given class
+    RETURN random health as positive integer for given class
     """
 
     return roll_die(1, CHARACTER_CLASS()[chosen_class])
