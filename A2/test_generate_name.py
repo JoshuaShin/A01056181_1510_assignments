@@ -12,7 +12,7 @@ class TestGenerateName(TestCase):
     def test_generate_name_length_long(self):
         self.assertEqual(len(generate_name(100)), 200)
 
-    def test_generate_name_capitalization(self):
+    def test_generate_name_capitalized(self):
         self.assertTrue(generate_name(1)[0].isupper())
 
     def test_generate_name_vowel(self):

@@ -110,6 +110,18 @@ def choose_inventory(inventory, selection):
         return sorted(random.sample(inventory, selection))
 
 
+def print_class_list():
+    """
+    Print the list of D&D classes.
+
+    POST-CONDITION print the list of D&D classes
+    """
+
+    print("CLASS LIST:")
+    for key in CHARACTER_CLASS().keys():
+        print(key)
+
+
 def choose_class():
     """
     Prompt user for class input and return class as string if class is valid.
@@ -117,10 +129,7 @@ def choose_class():
     RETURN chosen class in string
     """
 
-    print("CLASS LIST:")
-    for key in CHARACTER_CLASS().keys():
-        print(key)
-
+    print_class_list()
     chosen_class = input("Choose a class: ").strip().lower()
 
     if chosen_class in CHARACTER_CLASS().keys():

@@ -1,5 +1,5 @@
 import io
-import unittest.mock
+from unittest.mock import patch
 from unittest import TestCase
 from dungeonsanddragons import choose_inventory
 
@@ -17,7 +17,7 @@ class TestChooseInventory(TestCase):
     def test_choose_inventory_negative_selection(self):
         self.assertEqual(choose_inventory(sample_inventory, -1), None)
 
-    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    @patch('sys.stdout', new_callable=io.StringIO)
     def test_choose_inventory_negative_selection_warning(self, mock_stdout):
         choose_inventory(sample_inventory, -1)
         self.assertTrue("WARNING" in mock_stdout.getvalue())
@@ -25,7 +25,7 @@ class TestChooseInventory(TestCase):
     def test_choose_inventory_over_selection(self):
         self.assertEqual(choose_inventory(sample_inventory, 9), None)
 
-    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    @patch('sys.stdout', new_callable=io.StringIO)
     def test_choose_inventory_over_selection_warning(self, mock_stdout):
         choose_inventory(sample_inventory, 9)
         self.assertTrue("WARNING" in mock_stdout.getvalue())
