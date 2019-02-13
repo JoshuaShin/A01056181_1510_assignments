@@ -231,6 +231,7 @@ def combat_attack(attacker, defender):
     if first_attacker_accuracy > defender["Dexterity"]:
         damage = roll_die(1, CHARACTER_CLASS()[attacker["Class"]])
         defender["HP"] -= damage
+        defender["HP"] = max(defender["HP"], 0)
         print(attacker["Name"], "hits", defender["Name"], "for", damage, "damage!")
 
     else:
