@@ -14,7 +14,7 @@ import random
 import doctest
 
 
-def CHARACTER_CLASS():
+def character_class():
     """
     Return a dictionary of D&D characters and their corresponding health die.
 
@@ -120,7 +120,7 @@ def print_class_list():
     """
 
     print("CLASS LIST:")
-    for key in CHARACTER_CLASS().keys():
+    for key in character_class().keys():
         print(key)
 
 
@@ -134,7 +134,7 @@ def choose_class():
     print_class_list()
     chosen_class = input("Choose a class: ").strip().lower()
 
-    if chosen_class in CHARACTER_CLASS().keys():
+    if chosen_class in character_class().keys():
         return chosen_class
     else:
         return choose_class()
@@ -149,7 +149,7 @@ def assign_health(chosen_class):
     RETURN random health as positive integer for given class
     """
 
-    return roll_die(1, CHARACTER_CLASS()[chosen_class])
+    return roll_die(1, character_class()[chosen_class])
 
 
 def create_character(name_length):
@@ -229,7 +229,7 @@ def combat_attack(attacker, defender):
     print(defender["Name"] + "'s dexterity is", defender["Dexterity"])
 
     if first_attacker_accuracy > defender["Dexterity"]:
-        damage = roll_die(1, CHARACTER_CLASS()[attacker["Class"]])
+        damage = roll_die(1, character_class()[attacker["Class"]])
         defender["HP"] -= damage
         defender["HP"] = max(defender["HP"], 0)
         print(attacker["Name"], "hits", defender["Name"], "for", damage, "damage!")
@@ -350,6 +350,8 @@ def main():
 
     # Demonstrate combat_round()
     combat_round(character_1, character_2)
+
+    input("Press any key to continue...")
 
     # Demonstrate generate_name()
     print("--------------------")

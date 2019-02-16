@@ -32,3 +32,7 @@ class TestChooseInventory(TestCase):
 
     def test_choose_inventory_equal_selection(self):
         self.assertEqual(choose_inventory(sample_inventory, 8), sample_inventory)
+
+    def test_choose_inventory_string_input(self):
+        with self.assertRaises(TypeError):
+            choose_inventory(sample_inventory, "")

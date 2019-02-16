@@ -1,5 +1,5 @@
 from unittest import TestCase
-from dungeonsanddragons import assign_health, CHARACTER_CLASS
+from dungeonsanddragons import assign_health, character_class
 import random
 
 
@@ -9,5 +9,5 @@ class TestAssignHealth(TestCase):
 
     def test_assign_health_range(self):
         for i in range(0, 1000):
-            random_class = random.choice(list(CHARACTER_CLASS().keys()))
-            self.assertTrue(1 <= assign_health(random_class) <= CHARACTER_CLASS()[random_class])
+            random_class = random.choice(list(character_class().keys()))
+            self.assertTrue(1 <= assign_health(random_class) <= character_class()[random_class])
