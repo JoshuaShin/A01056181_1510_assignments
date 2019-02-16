@@ -34,6 +34,17 @@ def roll_die(number_of_rolls, number_of_sides):
     PRE-CONDITION integer must be positive
     PRE-CONDITION integer must be positive
     RETURN the sum of the die of the specified size rolled the specified number of times
+
+    >>> random.seed(0)
+    >>> roll_die(0, 0)
+    0
+    >>> roll_die(1, 1)
+    1
+    >>> roll_die(6, 1)
+    6
+    >>> roll_die(1, 6)
+    4
+    >>> random.seed()
     """
 
     if number_of_rolls < 1 or number_of_sides < 1:
@@ -47,6 +58,11 @@ def generate_consonant():
     Return a consonant including y.
 
     RETURN a consonant including y
+
+    >>> random.seed(0)
+    >>> generate_consonant()
+    'q'
+    >>> random.seed()
     """
 
     return random.choice("bcdfghjklmnpqrstvwxyz")
@@ -57,6 +73,11 @@ def generate_vowel():
     Return a vowel including y.
 
     RETURN a vowel including y
+
+    >>> random.seed(0)
+    >>> generate_vowel()
+    'o'
+    >>> random.seed()
     """
 
     return random.choice("aeiouy")
@@ -67,6 +88,11 @@ def generate_syllable():
     Return a syllable made of a consonant and vowel.
 
     RETURN a syllable made of a consonant and vowel
+
+    >>> random.seed(0)
+    >>> generate_syllable()
+    'qo'
+    >>> random.seed()
     """
 
     return generate_consonant() + generate_vowel()
@@ -79,6 +105,11 @@ def generate_name(syllables):
     PARAM positive integer
     PRE-CONDITION integer must be positive
     RETURN a random name of length syllables * 2
+
+    >>> random.seed(0)
+    >>> generate_name(2)
+    'Qoci'
+    >>> random.seed()
     """
 
     name = ""
@@ -96,6 +127,11 @@ def choose_inventory(inventory, selection):
     PRE-CONDITION list must not be empty and larger than selection
     PRE-CONDITION integer must be positive
     RETURN sorted random selections from inventory amounting to the parameter selection
+
+    >>> random.seed(0)
+    >>> choose_inventory(['a', 'b', 'c', 'd'], 2)
+    ['b', 'd']
+    >>> random.seed()
     """
 
     if len(inventory) == 0 and selection == 0:
@@ -147,6 +183,11 @@ def assign_health(chosen_class):
     PARAM class in string
     PRE-CONDITION must be valid class
     RETURN random health as positive integer for given class
+
+    >>> random.seed(0)
+    >>> assign_health('bard')
+    7
+    >>> random.seed()
     """
 
     return roll_die(1, character_class()[chosen_class])
@@ -246,6 +287,12 @@ def is_dead(character):
     PRE-CONDITION parameter is well-formed dictionaries each containing a correct character
     POST-CONDITION announce death if character is dead
     RETURN True if character is dead
+
+    >>> is_dead({'Name': 'A', 'Class': 'barbarian', 'HP': 10})
+    False
+    >>> is_dead({'Name': 'A', 'Class': 'barbarian', 'HP': 0})
+    A is dead!
+    True
     """
 
     if character["HP"] <= 0:
