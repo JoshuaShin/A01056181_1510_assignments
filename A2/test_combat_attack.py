@@ -13,17 +13,17 @@ defender = {'Name': 'B', 'Class': 'barbarian', 'HP': 10, 'Strength': 10, 'Dexter
 class TestCombatAttack(TestCase):
     @patch('dungeonsanddragons.roll_die', side_effect=[11, 0])
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_combat_attack_success(self, mock_stdout, input):
+    def test_combat_attack_success(self, mock_stdout, mock_input):
         combat_attack(attacker, defender)
         self.assertTrue("hits" in mock_stdout.getvalue())
 
     @patch('dungeonsanddragons.roll_die', side_effect=[10])
     @patch('sys.stdout', new_callable=io.StringIO)
-    def test_combat_attack_fail(self, mock_stdout, input):
+    def test_combat_attack_fail(self, mock_stdout, mock_input):
         combat_attack(attacker, defender)
         self.assertTrue("misses" in mock_stdout.getvalue())
 
     @patch('dungeonsanddragons.roll_die', side_effect=[11, 1])
-    def test_combat_attack_damage(self, input):
+    def test_combat_attack_damage(self, mock_input):
         combat_attack(attacker, defender)
         self.assertEqual(defender["HP"], 9)
