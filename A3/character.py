@@ -10,12 +10,29 @@ Character and associated functions for SUD.
 # Mar 1st 2019
 
 
-import random
 import doctest
 import map
 
 
 character_coordinate = (1, 1)
+character_heath = (1, 1)
+
+
+def MAX_HEALTH():
+    return 10
+
+
+def get_character_health():
+    return character_heath
+
+
+def set_character_health(change_amount):
+    global character_health
+    character_health += change_amount
+    if character_health > MAX_HEALTH():
+        character_health = MAX_HEALTH()
+    elif character_health < 0:
+        character_health = 0
 
 
 def get_character_coordinate():
