@@ -16,10 +16,6 @@ import random
 import doctest
 
 
-def main():
-    pass
-
-
 def roll_die(number_of_rolls, number_of_sides):
     """
     Simulate rolling a die of the specified size the specified number of times.
@@ -47,6 +43,9 @@ def roll_die(number_of_rolls, number_of_sides):
     else:
         return random.randrange(1, number_of_sides + 1, 1) + roll_die(number_of_rolls - 1, number_of_sides)
 
+
+def main():
+    doctest.testmod()
 
 
 if __name__ == "__main__":
