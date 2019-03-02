@@ -18,15 +18,24 @@ import map
 character_coordinate = (1, 1)
 
 
-def move_player(direction):
+def get_character_coordinate():
     """
-    Move player in the given map North, East, South, or West.
+    Get character coordinates.
 
-    PARAM 2D array of strings representing the map of the dungeon and its current state
+    RETURN character coordinates x and y in integer
+    """
+
+    return character_coordinate
+
+
+def move_character(direction):
+    """
+    Move character in the given map North, East, South, or West.
+
     PARAM string containing cardinal direction
-    PRE-CONDITION 2D array of strings representing the map of the dungeon and its current state
     PRE-CONDITION string containing single cardinal direction - 'north', 'west', 'south', 'east'
-    POST CONDITION move player ('p') in the given map North, East, South, or West
+    POST CONDITION move character coordinate North, East, South, or West
+    RETURN True if character is moved
     """
 
     current_x, current_y = character_coordinate

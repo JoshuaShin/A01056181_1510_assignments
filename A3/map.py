@@ -12,6 +12,7 @@ Map and associated functions for SUD.
 
 import random
 import doctest
+import character
 
 
 def get_map():
@@ -26,6 +27,20 @@ def get_map():
             ['w', 'o', 'o', 'o', 'w'],
             ['w', 'o', 'o', 'o', 'w'],
             ['w', 'w', 'w', 'w', 'w']]
+
+
+def print_map():
+    """
+    Print the map.
+
+    POST CONDITION map and player location is printed
+    """
+
+    print([['w', 'w', 'w', 'w', 'w'],
+           ['w', 'o', 'o', 'o', 'w'],
+           ['w', 'o', 'o', 'o', 'w'],
+           ['w', 'o', 'o', 'o', 'w'],
+           ['w', 'w', 'w', 'w', 'w']])
 
 
 def is_impassable(x, y):
