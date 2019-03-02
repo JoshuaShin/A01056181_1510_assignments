@@ -50,6 +50,21 @@ def can_traverse(x, y):
         return True
 
 
+def remove_player(map):
+    """
+    Remove player ('p') from the given map.
+
+    PARAM 2D array of strings representing the map of the dungeon and its current state
+    POST CONDITION remove player ('p') from the given map
+    """
+
+    for y in range(len(map)):
+        for x in range(len(map[y])):
+            if 'p' in map[y][x]:
+                map[y][x] = map[y][x].replace("P", "")
+                return
+
+
 def main():
     doctest.testmod()
 
