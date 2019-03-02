@@ -12,7 +12,6 @@ Map and associated functions for SUD.
 
 import random
 import doctest
-import character
 
 
 def get_map():
@@ -22,25 +21,11 @@ def get_map():
     RETURN 2D array of strings representing the map of the dungeon
     """
 
-    return [['w', 'w', 'w', 'w', 'w'],
-            ['w', 'o', 'o', 'o', 'w'],
-            ['w', 'o', 'o', 'o', 'w'],
-            ['w', 'o', 'o', 'o', 'w'],
-            ['w', 'w', 'w', 'w', 'w']]
-
-
-def print_map():
-    """
-    Print the map.
-
-    POST CONDITION map and player location is printed
-    """
-
-    print([['w', 'w', 'w', 'w', 'w'],
-           ['w', 'o', 'o', 'o', 'w'],
-           ['w', 'o', 'o', 'o', 'w'],
-           ['w', 'o', 'o', 'o', 'w'],
-           ['w', 'w', 'w', 'w', 'w']])
+    return [[' ', '-', '-', '-', ' '],
+            ['|', ' ', ' ', ' ', '|'],
+            ['|', ' ', ' ', ' ', '|'],
+            ['|', ' ', ' ', ' ', '|'],
+            [' ', '-', '-', '-', ' ']]
 
 
 def is_impassable(x, y):
@@ -59,10 +44,10 @@ def is_impassable(x, y):
 
     impassable = "w"
 
-    if get_map()[x][y][0] in impassable:
-        return False
-    else:
+    if get_map()[y][x] in impassable:
         return True
+    else:
+        return False
 
 
 # def remove_player(current_map):

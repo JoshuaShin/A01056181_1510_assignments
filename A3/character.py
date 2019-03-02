@@ -38,6 +38,7 @@ def move_character(direction):
     RETURN True if character is moved
     """
 
+    global character_coordinate
     current_x, current_y = character_coordinate
 
     if direction == 'north':
@@ -49,14 +50,15 @@ def move_character(direction):
     elif direction == 'south':
         destination_x = current_x
         destination_y = current_y + 1
-    else:  # direction == 'east':
+    elif direction == 'east':
         destination_x = current_x + 1
         destination_y = current_y
+    else:
+        return False
 
     if map.is_impassable(destination_x, destination_y):
         return False
     else:
-        global character_coordinate
         character_coordinate = (destination_x, destination_y)
         return True
 

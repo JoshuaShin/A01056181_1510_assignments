@@ -14,6 +14,8 @@ Commands: north, east, south, weest, fight, flee.
 
 import random
 import doctest
+import map
+import character
 
 
 def roll_die(number_of_rolls, number_of_sides):
@@ -44,8 +46,30 @@ def roll_die(number_of_rolls, number_of_sides):
         return random.randrange(1, number_of_sides + 1, 1) + roll_die(number_of_rolls - 1, number_of_sides)
 
 
+def print_map():
+    """
+    Print the map.
+
+    POST CONDITION map and player location is printed
+    """
+
+    game_map = map.get_map()
+    char_x, char_y = character.get_character_coordinate()
+    for y in range(len(game_map)):
+        for x in range(len(game_map[y])):
+            if char_x == x and char_y == y:
+                print('O', end=' ')
+            else:
+                print(game_map[y][x], end=' ')
+        print('')
+
+
 def main():
     doctest.testmod()
+    print_map()
+    print(character.get_character_coordinate())
+    character.move_character('north')
+    print(character.get_character_coordinate())
 
 
 if __name__ == "__main__":
