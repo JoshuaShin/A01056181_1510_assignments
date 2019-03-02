@@ -64,12 +64,15 @@ def print_map():
         print('')
 
 
+def play_game():
+    while True:
+        character.move_character(input("Move: "))
+        print_map()
+
+
 def main():
     doctest.testmod()
-    print_map()
-    print(character.get_character_coordinate())
-    character.move_character('north')
-    print(character.get_character_coordinate())
+    play_game()
 
 
 if __name__ == "__main__":

@@ -42,7 +42,7 @@ def is_impassable(x, y):
     True
     """
 
-    impassable = "w"
+    impassable = "-|"
 
     if get_map()[y][x] in impassable:
         return True
