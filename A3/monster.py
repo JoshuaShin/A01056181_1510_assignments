@@ -13,7 +13,7 @@ Character and associated functions for SUD.
 import doctest
 
 
-hp = 10
+hp = 5
 
 
 def MAX_HP():
@@ -23,7 +23,7 @@ def MAX_HP():
     RETURN character coordinates x and y in integer
     """
 
-    return 10
+    return 5
 
 
 def get_hp():
@@ -51,6 +51,16 @@ def set_hp(change_amount):
         hp = MAX_HP()
     elif hp < 0:
         hp = 0
+
+
+def reset():
+    """
+    Reset monster.
+
+    POST CONDITION Set monster hp to max hp
+    """
+
+    set_hp(MAX_HP())
 
 
 def main():
