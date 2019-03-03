@@ -15,18 +15,38 @@ import map
 
 
 character_coordinate = (1, 1)
-character_heath = (1, 1)
+character_health = 10
 
 
 def MAX_HEALTH():
+    """
+    Max health constant.
+
+    RETURN character coordinates x and y in integer
+    """
+
     return 10
 
 
 def get_character_health():
-    return character_heath
+    """
+    Return character's current health.
+
+    RETURN character's current health
+    """
+
+    return character_health
 
 
 def set_character_health(change_amount):
+    """
+    Change character's current health by change amount specified.
+
+    PARAM positive or negative integer
+    PRE-CONDITION change amount is a positive or negative integer
+    POST CONDITION change character health by the change amount
+    """
+
     global character_health
     character_health += change_amount
     if character_health > MAX_HEALTH():
@@ -37,7 +57,7 @@ def set_character_health(change_amount):
 
 def get_character_coordinate():
     """
-    Get character coordinates.
+    Return character coordinates.
 
     RETURN character coordinates x and y in integer
     """

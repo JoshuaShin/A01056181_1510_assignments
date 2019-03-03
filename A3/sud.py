@@ -66,8 +66,10 @@ def print_map():
 
 def play_game():
     while True:
-        character.move_character(input("Move: "))
+        if not character.move_character(input("Move: ")):
+            print("Cannot go there.")
         print_map()
+        character.set_character_health(1)
 
 
 def main():
