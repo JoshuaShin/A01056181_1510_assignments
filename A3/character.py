@@ -14,13 +14,13 @@ import doctest
 import map
 
 
-character_coordinate = (1, 1)
-character_health = 10
+coordinates = (1, 1)
+hp = 10
 
 
-def MAX_HEALTH():
+def MAX_HP():
     """
-    Max health constant.
+    Max hp constant.
 
     RETURN character coordinates x and y in integer
     """
@@ -28,44 +28,44 @@ def MAX_HEALTH():
     return 10
 
 
-def get_character_health():
+def get_hp():
     """
-    Return character's current health.
+    Return character's current hp.
 
-    RETURN character's current health
+    RETURN character's current hp
     """
 
-    return character_health
+    return hp
 
 
-def set_character_health(change_amount):
+def set_hp(change_amount):
     """
-    Change character's current health by change amount specified.
+    Change character's current hp by change amount specified.
 
     PARAM positive or negative integer
     PRE-CONDITION change amount is a positive or negative integer
-    POST CONDITION change character health by the change amount
+    POST CONDITION change character hp by the change amount
     """
 
-    global character_health
-    character_health += change_amount
-    if character_health > MAX_HEALTH():
-        character_health = MAX_HEALTH()
-    elif character_health < 0:
-        character_health = 0
+    global hp
+    hp += change_amount
+    if hp > MAX_HP():
+        hp = MAX_HP()
+    elif hp < 0:
+        hp = 0
 
 
-def get_character_coordinate():
+def get_coordinates():
     """
     Return character coordinates.
 
     RETURN character coordinates x and y in integer
     """
 
-    return character_coordinate
+    return coordinates
 
 
-def move_character(direction):
+def move(direction):
     """
     Move character in the given map North, East, South, or West.
 
@@ -75,8 +75,8 @@ def move_character(direction):
     RETURN True if character is moved
     """
 
-    global character_coordinate
-    current_x, current_y = character_coordinate
+    global coordinates
+    current_x, current_y = coordinates
 
     if direction == 'north':
         destination_x = current_x
@@ -96,7 +96,7 @@ def move_character(direction):
     if map.is_impassable(destination_x, destination_y):
         return False
     else:
-        character_coordinate = (destination_x, destination_y)
+        coordinates = (destination_x, destination_y)
         return True
 
 

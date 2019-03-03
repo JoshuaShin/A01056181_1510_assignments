@@ -13,9 +13,6 @@ Character and associated functions for SUD.
 import doctest
 
 
-monster_health = 10
-
-
 def main():
     doctest.testmod()
 

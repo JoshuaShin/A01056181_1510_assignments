@@ -54,7 +54,7 @@ def print_map():
     """
 
     game_map = map.get_map()
-    char_x, char_y = character.get_character_coordinate()
+    char_x, char_y = character.get_coordinates()
     for y in range(len(game_map)):
         for x in range(len(game_map[y])):
             if char_x == x and char_y == y:
@@ -66,10 +66,10 @@ def print_map():
 
 def play_game():
     while True:
-        if not character.move_character(input("Move: ")):
-            print("Cannot go there.")
+        if not character.move(input("Move: ")):
+            print("Invalid.")
         print_map()
-        character.set_character_health(1)
+        character.set_hp(1)
 
 
 def main():
