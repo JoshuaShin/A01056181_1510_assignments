@@ -16,6 +16,7 @@ import random
 import doctest
 import map
 import character
+import monster
 
 
 def roll_die(number_of_rolls, number_of_sides):
@@ -44,6 +45,21 @@ def roll_die(number_of_rolls, number_of_sides):
         return 0
     else:
         return random.randrange(1, number_of_sides + 1, 1) + roll_die(number_of_rolls - 1, number_of_sides)
+
+
+def combat():
+    monster.reset()
+    print("COMBAT STARTS")
+    while True:
+        user_input = input()
+        if not monster.set_hp(-roll_die(1, 6)):
+            print("MONSTER SLAIN")
+            return
+        if not character.set_hp(-roll_die(1, 6)):
+            print("YOU DIED")
+            return
+        print("YOUR HP:", character.get_hp())
+        print("MONSTER HP:", monster.get_hp())
 
 
 def print_map():

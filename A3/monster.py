@@ -43,6 +43,8 @@ def set_hp(change_amount):
     PARAM positive or negative integer
     PRE-CONDITION change amount is a positive or negative integer
     POST CONDITION change character hp by the change amount
+    RETURN True if hp is not 0
+    RETURN False if hp is 0
     """
 
     global hp
@@ -51,6 +53,8 @@ def set_hp(change_amount):
         hp = MAX_HP()
     elif hp < 0:
         hp = 0
+        return False
+    return True
 
 
 def reset():
