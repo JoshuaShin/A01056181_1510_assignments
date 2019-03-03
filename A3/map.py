@@ -10,7 +10,6 @@ Map and associated functions for SUD.
 # Mar 1st 2019
 
 
-import random
 import doctest
 
 
@@ -26,6 +25,25 @@ def get_map():
             ['|', ' ', ' ', ' ', '|'],
             ['|', ' ', ' ', ' ', '|'],
             [' ', '-', '-', '-', ' ']]
+
+
+def print_map(character_coordinate):
+    """
+    Print the map and mark the player location.
+
+    PARAM tuple containing x and y coordinate of player
+    PRE-CONDITION player coordinate is within the map boundaries
+    POST-CONDITION map and player location is printed
+    """
+
+    char_x, char_y = character_coordinate
+    for y in range(len(get_map())):
+        for x in range(len(get_map()[y])):
+            if char_x == x and char_y == y:
+                print('O', end=' ')
+            else:
+                print(get_map()[y][x], end=' ')
+        print('')
 
 
 def is_impassable(x, y):

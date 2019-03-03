@@ -57,24 +57,24 @@ def combat():
     """
 
     monster.reset()
-    print("COMBAT STARTS")
+    print("--- COMBAT STARTS ---")
 
     while True:
         print("YOUR HP:", character.get_hp())
         print("MONSTER HP:", monster.get_hp())
 
-        user_input = input("PRESS ANY KEY TO CONTINUE")
+        user_input = input("--- PRESS ANY KEY TO CONTINUE ---")
 
         character_roll = roll_die(1, 6)
         print("CHARACTER ROLL:", character_roll, "ATTACK")
         if not monster.set_hp(-character_roll):
-            print("MONSTER SLAIN")
+            print("MONSTER HP: 0\n", "MONSTER SLAIN\n", "--- COMBAT ENDS ---")
             return True
 
         monster_roll = roll_die(1, 6)
         print("MONSTER ROLL:", monster_roll, "ATTACK")
         if not character.set_hp(-monster_roll):
-            print("YOU DIED")
+            print("YOUR HP: 0\n", "YOU DIED")
             return False
 
 
@@ -88,40 +88,22 @@ def game_over():
     print("GAME OVER")
 
 
-def print_map():
-    """
-    Print the map.
-
-    POST-CONDITION map and player location is printed
-    """
-
-    game_map = map.get_map()
-    char_x, char_y = character.get_coordinates()
-    for y in range(len(game_map)):
-        for x in range(len(game_map[y])):
-            if char_x == x and char_y == y:
-                print('O', end=' ')
-            else:
-                print(game_map[y][x], end=' ')
-        print('')
-
-
 def play_game():
     """
     Process the game play loop.
 
     POST-CONDITION make appropriate changes to character and monster according to events
     """
-    print_map()
+    map.print_map(character.get_coordinates())
 
     while True:
         if not character.move(input("Move: ")):
             print("Invalid.")
             continue
 
-        print_map()
+        map.print_map(character.get_coordinates())
 
-        if random.random() < 0.1:
+        if random.random() < 1:
             if not combat():
                 game_over()
                 break

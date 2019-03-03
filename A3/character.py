@@ -82,16 +82,16 @@ def move(direction):
     global coordinates
     current_x, current_y = coordinates
 
-    if direction == 'north':
+    if direction == 'north' or direction == 'n':
         destination_x = current_x
         destination_y = current_y - 1
-    elif direction == 'west':
+    elif direction == 'west' or direction == 'w':
         destination_x = current_x - 1
         destination_y = current_y
-    elif direction == 'south':
+    elif direction == 'south' or direction == 's':
         destination_x = current_x
         destination_y = current_y + 1
-    elif direction == 'east':
+    elif direction == 'east' or direction == 'e':
         destination_x = current_x + 1
         destination_y = current_y
     else:
