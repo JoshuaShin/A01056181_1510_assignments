@@ -79,6 +79,7 @@ def move(direction):
     RETURN True if character is moved
     """
 
+    # TODO: this function is too long (20+ lines)
     global coordinates
     current_x, current_y = coordinates
 

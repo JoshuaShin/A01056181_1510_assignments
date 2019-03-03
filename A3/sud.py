@@ -68,13 +68,13 @@ def combat():
         character_roll = roll_die(1, 6)
         print("CHARACTER ROLL:", character_roll, "ATTACK")
         if not monster.set_hp(-character_roll):
-            print("MONSTER HP: 0\n", "MONSTER SLAIN\n", "--- COMBAT ENDS ---")
+            print("MONSTER HP: 0", "\nMONSTER SLAIN", "\n--- COMBAT ENDS ---")
             return True
 
         monster_roll = roll_die(1, 6)
         print("MONSTER ROLL:", monster_roll, "ATTACK")
         if not character.set_hp(-monster_roll):
-            print("YOUR HP: 0\n", "YOU DIED")
+            print("YOUR HP: 0", "\nYOU DIED")
             return False
 
 
@@ -88,27 +88,46 @@ def game_over():
     print("GAME OVER")
 
 
+def quit_game():
+    """
+    Quit and save the game.
+
+    POST-CONDITION game is saved to JSON file
+    POST-CONDITION game saved message is printed
+    """
+
+    # TODO: save game TO JSON file
+    print("GAME SAVED")
+
+
 def play_game():
     """
     Process the game play loop.
 
     POST-CONDITION make appropriate changes to character and monster according to events
     """
-    map.print_map(character.get_coordinates())
 
+    map.print_map(character.get_coordinates())
     while True:
-        if not character.move(input("Move: ")):
+        player_input = input("Input: ")
+        # Quit
+        if player_input.strip().lower() == 'quit':
+            quit_game()
+            break
+        # Move
+        if not character.move(player_input):
             print("Invalid.")
             continue
-
         map.print_map(character.get_coordinates())
-
+        # Heal
+        if character.get_hp() < character.MAX_HP():
+            character.set_hp(1)
+            print("HEALED 1 HP", "\nYOUR HP:", character.get_hp())
+        # Combat
         if random.random() < 1:
             if not combat():
                 game_over()
                 break
-
-        character.set_hp(1)
 
 
 def main():
