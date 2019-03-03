@@ -48,25 +48,51 @@ def roll_die(number_of_rolls, number_of_sides):
 
 
 def combat():
+    """
+    Process the combat loop between character and monster.
+
+    POST-CONDITION character and monster takes damage until one dies
+    RETURN True if monster is slain
+    RETURN False if character is slain
+    """
+
     monster.reset()
     print("COMBAT STARTS")
+
     while True:
-        user_input = input()
-        if not monster.set_hp(-roll_die(1, 6)):
-            print("MONSTER SLAIN")
-            return
-        if not character.set_hp(-roll_die(1, 6)):
-            print("YOU DIED")
-            return
         print("YOUR HP:", character.get_hp())
         print("MONSTER HP:", monster.get_hp())
+
+        user_input = input("PRESS ANY KEY TO CONTINUE")
+
+        character_roll = roll_die(1, 6)
+        print("CHARACTER ROLL:", character_roll, "ATTACK")
+        if not monster.set_hp(-character_roll):
+            print("MONSTER SLAIN")
+            return True
+
+        monster_roll = roll_die(1, 6)
+        print("MONSTER ROLL:", monster_roll, "ATTACK")
+        if not character.set_hp(-monster_roll):
+            print("YOU DIED")
+            return False
+
+
+def game_over():
+    """
+    End the game.
+
+    POST-CONDITION game over message is printed
+    """
+
+    print("GAME OVER")
 
 
 def print_map():
     """
     Print the map.
 
-    POST CONDITION map and player location is printed
+    POST-CONDITION map and player location is printed
     """
 
     game_map = map.get_map()
@@ -81,10 +107,25 @@ def print_map():
 
 
 def play_game():
+    """
+    Process the game play loop.
+
+    POST-CONDITION make appropriate changes to character and monster according to events
+    """
+    print_map()
+
     while True:
         if not character.move(input("Move: ")):
             print("Invalid.")
+            continue
+
         print_map()
+
+        if random.random() < 0.1:
+            if not combat():
+                game_over()
+                break
+
         character.set_hp(1)
 
 

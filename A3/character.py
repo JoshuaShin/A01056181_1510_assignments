@@ -44,8 +44,8 @@ def set_hp(change_amount):
 
     PARAM positive or negative integer
     PRE-CONDITION change amount is a positive or negative integer
-    POST CONDITION change character hp by the change amount
-        RETURN True if hp is not 0
+    POST-CONDITION change character hp by the change amount
+    RETURN True if hp is not 0
     RETURN False if hp is 0
     """
 
@@ -53,7 +53,7 @@ def set_hp(change_amount):
     hp += change_amount
     if hp > MAX_HP():
         hp = MAX_HP()
-    elif hp < 0:
+    elif hp <= 0:
         hp = 0
         return False
     return True
@@ -75,7 +75,7 @@ def move(direction):
 
     PARAM string containing cardinal direction
     PRE-CONDITION string containing single cardinal direction - 'north', 'west', 'south', 'east'
-    POST CONDITION move character coordinate North, East, South, or West
+    POST-CONDITION move character coordinate North, East, South, or West
     RETURN True if character is moved
     """
 

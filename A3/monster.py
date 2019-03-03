@@ -42,7 +42,7 @@ def set_hp(change_amount):
 
     PARAM positive or negative integer
     PRE-CONDITION change amount is a positive or negative integer
-    POST CONDITION change character hp by the change amount
+    POST-CONDITION change character hp by the change amount
     RETURN True if hp is not 0
     RETURN False if hp is 0
     """
@@ -51,7 +51,7 @@ def set_hp(change_amount):
     hp += change_amount
     if hp > MAX_HP():
         hp = MAX_HP()
-    elif hp < 0:
+    elif hp <= 0:
         hp = 0
         return False
     return True
@@ -61,7 +61,7 @@ def reset():
     """
     Reset monster.
 
-    POST CONDITION Set monster hp to max hp
+    POST-CONDITION Set monster hp to max hp
     """
 
     set_hp(MAX_HP())
