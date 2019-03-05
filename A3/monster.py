@@ -64,7 +64,7 @@ def reset():
     POST-CONDITION Set monster hp to max hp
     """
 
-    set_hp(MAX_HP())
+    save.reset_monster()
 
 
 def main():

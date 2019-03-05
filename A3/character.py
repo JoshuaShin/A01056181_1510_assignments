@@ -104,6 +104,17 @@ def move(direction):
         return True
 
 
+def reset():
+    """
+    Reset character.
+
+    POST-CONDITION Set character hp to max hp
+    POST-CONDITION Set character coordinate to default
+    """
+
+    save.reset_character()
+
+
 def main():
     doctest.testmod()
 

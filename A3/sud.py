@@ -87,17 +87,28 @@ def game_over():
     """
 
     print("GAME OVER")
+    character.reset()
+
+
+def restart_game():
+    """
+    Restart the game.
+
+    POST-CONDITION character is reset and restart message is printed
+    """
+
+    print("RESTART GAME")
+    character.reset()
+    play_game()
 
 
 def quit_game():
     """
     Quit and save the game.
 
-    POST-CONDITION game is saved to JSON file
     POST-CONDITION game saved message is printed
     """
 
-    # TODO: save game TO JSON file
     print("GAME SAVED")
 
 
@@ -115,8 +126,12 @@ def play_game():
         if player_input.strip().lower() == 'quit':
             quit_game()
             break
+        # Restart
+        if player_input.strip().lower() == 'restart':
+            restart_game()
+            break
         # Move
-        if not character.move(player_input):
+        if not character.move(player_input.strip().lower()):
             print("Invalid.")
             continue
         map.print_map(character.get_coordinates())
