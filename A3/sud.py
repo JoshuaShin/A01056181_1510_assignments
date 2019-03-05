@@ -17,6 +17,7 @@ import doctest
 import map
 import character
 import monster
+import save
 
 
 def roll_die(number_of_rolls, number_of_sides):
@@ -74,7 +75,7 @@ def combat():
         monster_roll = roll_die(1, 6)
         print("MONSTER ROLL:", monster_roll, "ATTACK")
         if not character.set_hp(-monster_roll):
-            print("YOUR HP: 0", "\nYOU DIED")
+            print("MONSTER HP: 0", "\nYOUR HP: 0", "\nYOU DIED")
             return False
 
 

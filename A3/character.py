@@ -12,10 +12,7 @@ Character and associated functions for SUD.
 
 import doctest
 import map
-
-
-coordinates = (1, 1)
-hp = 10
+import save
 
 
 def MAX_HP():
@@ -35,7 +32,7 @@ def get_hp():
     RETURN character's current hp
     """
 
-    return hp
+    return save.load_character()["hp"]
 
 
 def set_hp(change_amount):
@@ -49,13 +46,15 @@ def set_hp(change_amount):
     RETURN False if hp is 0
     """
 
-    global hp
+    hp = get_hp()
     hp += change_amount
     if hp > MAX_HP():
         hp = MAX_HP()
     elif hp <= 0:
         hp = 0
+        save.save_character({"hp": hp, "coordinate_x": get_coordinates()[0], "coordinate_y": get_coordinates()[1]})
         return False
+    save.save_character({"hp": hp, "coordinate_x": get_coordinates()[0], "coordinate_y": get_coordinates()[1]})
     return True
 
 
@@ -66,7 +65,8 @@ def get_coordinates():
     RETURN character coordinates x and y in integer
     """
 
-    return coordinates
+    character = save.load_character()
+    return character["coordinate_x"], character["coordinate_y"]
 
 
 def move(direction):
@@ -80,8 +80,7 @@ def move(direction):
     """
 
     # TODO: this function is too long (20+ lines)
-    global coordinates
-    current_x, current_y = coordinates
+    current_x, current_y = get_coordinates()
 
     if direction == 'north' or direction == 'n':
         destination_x = current_x
@@ -101,7 +100,7 @@ def move(direction):
     if map.is_impassable(destination_x, destination_y):
         return False
     else:
-        coordinates = (destination_x, destination_y)
+        save.save_character({"hp": get_hp(), "coordinate_x": destination_x, "coordinate_y": destination_y})
         return True
 
 

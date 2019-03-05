@@ -68,35 +68,6 @@ def is_impassable(x, y):
         return False
 
 
-# def remove_player(current_map):
-#     """
-#     Remove player ('p') from the given map.
-#
-#     PARAM 2D array of strings representing the map of the dungeon and its current state
-#     POST CONDITION remove player ('p') from the given map
-#     """
-#
-#     x, y = get_player_coordinate(current_map)
-#     current_map[y][x] = current_map[y][x].replace('p', '')
-#
-#
-# def get_player_coordinate(current_map):
-#     """
-#     Return the x, y coordinate of player ('p') in the given map.
-#
-#     PARAM 2D array of strings representing the map of the dungeon and its current state
-#     RETURN the x, y coordinate of player ('p') in the given map
-#
-#     >>> get_player_coordinate([['o', 'o'], ['o', 'op']])
-#     (1, 1)
-#     """
-#
-#     for y in range(len(current_map)):
-#         for x in range(len(current_map[y])):
-#             if 'p' in current_map[y][x]:
-#                 return x, y
-
-
 def main():
     doctest.testmod()
 

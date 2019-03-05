@@ -11,9 +11,7 @@ Character and associated functions for SUD.
 
 
 import doctest
-
-
-hp = 5
+import save
 
 
 def MAX_HP():
@@ -33,7 +31,7 @@ def get_hp():
     RETURN character's current hp
     """
 
-    return hp
+    return save.load_monster()["hp"]
 
 
 def set_hp(change_amount):
@@ -47,13 +45,15 @@ def set_hp(change_amount):
     RETURN False if hp is 0
     """
 
-    global hp
+    hp = get_hp()
     hp += change_amount
     if hp > MAX_HP():
         hp = MAX_HP()
     elif hp <= 0:
         hp = 0
+        save.save_monster({"hp": hp})
         return False
+    save.save_monster({"hp": hp})
     return True
 
 
