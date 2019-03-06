@@ -96,6 +96,8 @@ def combat_flee():
         elif user_input == "n":
             combat_flee_damage()
             return True
+        else:
+            print("INVALID INPUT")
 
 
 def combat_flee_damage():

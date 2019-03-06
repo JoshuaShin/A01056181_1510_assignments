@@ -3,7 +3,7 @@ sud.py
 
 Single User Dungeon game.
 Type commands to interact with the environment.
-Commands: north, east, south, weest, fight, flee.
+Commands: north, east, south, weest, restart, quit.
 """
 
 
@@ -28,8 +28,8 @@ def print_introduction():
     """
 
     print("""
-    You are stuck in an incredibly dull dungeon with no exits.
-    You are filled to the brim with excitement at the prospect of exploring all 9 identical tiles.
+    You are stuck in an incredibly dull dungeon with no exits. ☹
+    You are filled to the brim with excitement at the prospect of exploring all 9 identical tiles.  ♪~ ᕕ(ᐛ)ᕗ
     Valid commands: n, w, s, e, quit, restart.
     """)
 
@@ -94,8 +94,8 @@ def load_game():
     char = save.read_data()
     character.set_hp(char['hp'])
     character.set_coordinates(char['x'], char['y'])
-    print(character.get_hp())
-    print(character.get_coordinates())
+    print("YOUR HP:", character.get_hp())
+    print("YOUR COORDINATES:", character.get_coordinates())
 
 
 def play_game():
@@ -105,23 +105,23 @@ def play_game():
     POST-CONDITION make appropriate changes to character and monster according to events
     """
 
-    load_game()
     print_introduction()
+    load_game()
     map.print_map(character.get_coordinates())
     while True:
         player_input = input(">>> ")
         # Quit
         if player_input.strip().lower() == 'quit':
             quit_game()
-            break
         # Restart
         if player_input.strip().lower() == 'restart':
             restart_game()
             break
         # Move
         if not character.move(player_input.strip().lower()):
-            print("Invalid.")
+            print("INVALID INPUT")
             continue
+        print("You find absolutely nothing of interest in this tile.")
         map.print_map(character.get_coordinates())
         # Heal
         if character.get_hp() < character.MAX_HP():

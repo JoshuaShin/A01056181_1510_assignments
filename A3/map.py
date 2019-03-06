@@ -40,9 +40,9 @@ def print_map(character_coordinate):
     for y in range(len(get_map())):
         for x in range(len(get_map()[y])):
             if char_x == x and char_y == y:
-                print('O', end=' ')
+                print('☹', end=' ')
             else:
-                print(get_map()[y][x], end=' ')
+                print(get_map()[y][x], end=' ')
         print('')
 
 
