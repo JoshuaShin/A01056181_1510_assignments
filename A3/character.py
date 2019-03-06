@@ -12,7 +12,24 @@ Character and associated functions for SUD.
 
 import doctest
 import map
-import save
+
+
+hp = 10
+coordinates = (2, 2)
+
+
+def reset():
+    """
+    Reset character.
+
+    POST-CONDITION Set character hp to max hp
+    POST-CONDITION Set character coordinate to default
+    """
+
+    global hp
+    global coordinates
+    hp = 10
+    coordinates = (2, 2)
 
 
 def MAX_HP():
@@ -32,10 +49,23 @@ def get_hp():
     RETURN character's current hp
     """
 
-    return save.load_character()["hp"]
+    return hp
 
 
-def set_hp(change_amount):
+def set_hp(new_hp):
+    """
+    Set character's current hp.
+
+    PARAM positive integer
+    PRE-CONDITION integer is within valid character health
+    POST-CONDITION character's current hp
+    """
+
+    global hp
+    hp = new_hp
+
+
+def modify_hp(change_amount):
     """
     Change character's current hp by change amount specified.
 
@@ -46,15 +76,13 @@ def set_hp(change_amount):
     RETURN False if hp is 0
     """
 
-    hp = get_hp()
+    global hp
     hp += change_amount
     if hp > MAX_HP():
         hp = MAX_HP()
     elif hp <= 0:
         hp = 0
-        save.save_character({"hp": hp, "coordinate_x": get_coordinates()[0], "coordinate_y": get_coordinates()[1]})
         return False
-    save.save_character({"hp": hp, "coordinate_x": get_coordinates()[0], "coordinate_y": get_coordinates()[1]})
     return True
 
 
@@ -65,8 +93,22 @@ def get_coordinates():
     RETURN character coordinates x and y in integer
     """
 
-    character = save.load_character()
-    return character["coordinate_x"], character["coordinate_y"]
+    return coordinates
+
+
+def set_coordinates(x, y):
+    """
+    Set character coordinates to x and y.
+
+    PARAM is positive integer
+    PARAM is positive integer
+    PRE-CONDITION integer is within the map width
+    PRE-CONDITION integer is within the map height
+    POST-CONDITION set character coordinates
+    """
+
+    global coordinates
+    coordinates = (x, y)
 
 
 def move(direction):
@@ -79,8 +121,8 @@ def move(direction):
     RETURN True if character is moved
     """
 
-    # TODO: this function is too long (20+ lines)
-    current_x, current_y = get_coordinates()
+    global coordinates
+    current_x, current_y = coordinates
 
     if direction == 'north' or direction == 'n':
         destination_x = current_x
@@ -100,19 +142,8 @@ def move(direction):
     if map.is_impassable(destination_x, destination_y):
         return False
     else:
-        save.save_character({"hp": get_hp(), "coordinate_x": destination_x, "coordinate_y": destination_y})
+        coordinates = (destination_x, destination_y)
         return True
-
-
-def reset():
-    """
-    Reset character.
-
-    POST-CONDITION Set character hp to max hp
-    POST-CONDITION Set character coordinate to default
-    """
-
-    save.reset_character()
 
 
 def main():

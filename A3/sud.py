@@ -17,6 +17,7 @@ import doctest
 import map
 import character
 import combat
+import save
 
 
 def print_introduction():
@@ -27,9 +28,9 @@ def print_introduction():
     """
 
     print("""
-    Welcome to the game.
-    This is very exciting, I know.
-    Valid commands: n, w, s, e, quit, restart
+    You are stuck in an incredibly dull dungeon with no exits.
+    You are filled to the brim with excitement at the prospect of exploring all 9 identical tiles.
+    Valid commands: n, w, s, e, quit, restart.
     """)
 
 
@@ -53,6 +54,7 @@ def restart_game():
 
     print("RESTART GAME")
     character.reset()
+    save_game()
     play_game()
 
 
@@ -60,10 +62,40 @@ def quit_game():
     """
     Quit and save the game.
 
+    POST-CONDITION game is saved
     POST-CONDITION game saved message is printed
+    POST-CONDITION program terminates
     """
 
+    save_game()
     print("GAME SAVED")
+    quit()
+
+
+def save_game():
+    """
+    Save character data to character.json.
+
+    POST-CONDITION character data is saved
+    """
+
+    save.write_data({'hp': character.get_hp(),
+                     'x': character.get_coordinates()[0],
+                     'y': character.get_coordinates()[1]})
+
+
+def load_game():
+    """
+    Load character data from character.json.
+
+    POST-CONDITION character data is loaded and character is updated
+    """
+
+    char = save.read_data()
+    character.set_hp(char['hp'])
+    character.set_coordinates(char['x'], char['y'])
+    print(character.get_hp())
+    print(character.get_coordinates())
 
 
 def play_game():
@@ -72,10 +104,12 @@ def play_game():
 
     POST-CONDITION make appropriate changes to character and monster according to events
     """
+
+    load_game()
     print_introduction()
     map.print_map(character.get_coordinates())
     while True:
-        player_input = input("Input: ")
+        player_input = input(">>> ")
         # Quit
         if player_input.strip().lower() == 'quit':
             quit_game()
@@ -91,7 +125,7 @@ def play_game():
         map.print_map(character.get_coordinates())
         # Heal
         if character.get_hp() < character.MAX_HP():
-            character.set_hp(1)
+            character.modify_hp(1)
             print("HEALED 1 HP", "\nYOUR HP:", character.get_hp())
         # Combat
         if random.random() < 1:

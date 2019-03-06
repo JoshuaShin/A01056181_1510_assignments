@@ -14,40 +14,26 @@ import doctest
 import json
 
 
-def load_character():
-    with open('character.json') as data_file:
-        return json.load(data_file)
+def read_data():
+    """
+    Read data from character.json.
+
+    RETURN dictionary of character data
+    """
+
+    with open('character.json') as file_object:
+        return json.load(file_object)
 
 
-def save_character(character):
-    with open('character.json', 'w') as outfile:
-        json.dump(character, outfile, sort_keys=True, indent=4)
+def write_data(dictionary):
+    """
+    Save data to character.json.
 
+    POST-CONDITION character data is saved to character.json
+    """
 
-def reset_character():
-    with open('character.json', 'w') as outfile:
-        json.dump({
-            "coordinate_x": 2,
-            "coordinate_y": 2,
-            "hp": 10
-        }, outfile, sort_keys=True, indent=4)
-
-
-def load_monster():
-    with open('monster.json') as data_file:
-        return json.load(data_file)
-
-
-def save_monster(monster):
-    with open('monster.json', 'w') as outfile:
-        json.dump(monster, outfile, sort_keys=True, indent=4)
-
-
-def reset_monster():
-    with open('monster.json', 'w') as outfile:
-        json.dump({
-            "hp": 5
-        }, outfile, sort_keys=True, indent=4)
+    with open('character.json', 'w') as file_object:
+        json.dump(dictionary, file_object, sort_keys=True, indent=4)
 
 
 def main():

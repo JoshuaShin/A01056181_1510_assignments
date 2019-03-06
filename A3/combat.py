@@ -1,7 +1,7 @@
 """
-map.py
+combat.py
 
-Map and associated functions for SUD.
+Combat functions for SUD.
 """
 
 
@@ -74,7 +74,7 @@ def combat():
 
         monster_roll = roll_die(1, 6)
         print("MONSTER ROLLS:", monster_roll, "ATTACK")
-        if not character.set_hp(-monster_roll):
+        if not character.modify_hp(-monster_roll):
             print("MONSTER HP:", monster.get_hp(), "\nYOUR HP: 0", "\nYOU DIED")
             return False
 
@@ -108,7 +108,7 @@ def combat_flee_damage():
     if random.random() < 1:
         monster_roll = roll_die(1, 4)
         print("--- FLEE PENALTY ---", "\nMONSTER ROLLS:", monster_roll, "ATTACK")
-        if not character.set_hp(-monster_roll):
+        if not character.modify_hp(-monster_roll):
             print("YOUR HP: 0", "\nYOU DIED")
         else:
             print("YOUR HP:", character.get_hp())
