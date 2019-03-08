@@ -68,7 +68,7 @@ def combat():
 
         character_roll = roll_die(1, 6)
         print("USS ENTERPRISE FIRES:", character_roll, "PHOTON TORPEDO(ES)")
-        if not monster.set_hp(-character_roll):
+        if not monster.modify_hp(-character_roll):
             print("ENEMY STRUCTURAL INTEGRITY: 0", "\nENEMY DESTROYED", "\n--- COMBAT ENDS ---")
             return True
 

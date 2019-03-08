@@ -149,8 +149,6 @@ def load_game():
     char = save.read_data()
     character.set_hp(char['hp'])
     character.set_coordinates(char['x'], char['y'])
-    # print("YOUR HP:", character.get_hp())
-    # print("YOUR COORDINATES:", character.get_coordinates())
 
 
 def play_game():

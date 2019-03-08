@@ -15,7 +15,7 @@ import map
 
 
 hp = 10
-coordinates = (30, 10)
+coordinates = (29, 16)
 
 
 def reset():
@@ -29,7 +29,7 @@ def reset():
     global hp
     global coordinates
     hp = 10
-    coordinates = (29, 15)
+    coordinates = (29, 16)
 
 
 def MAX_HP():
@@ -37,6 +37,9 @@ def MAX_HP():
     Max hp constant.
 
     RETURN character coordinates x and y in integer
+
+    >>> MAX_HP()
+    10
     """
 
     return 10
@@ -47,6 +50,9 @@ def get_hp():
     Return character's current hp.
 
     RETURN character's current hp
+
+    >>> get_hp()
+    10
     """
 
     return hp
@@ -74,6 +80,11 @@ def modify_hp(change_amount):
     POST-CONDITION change character hp by the change amount
     RETURN True if hp is not 0
     RETURN False if hp is 0
+
+    >>> modify_hp(10)
+    True
+    >>> modify_hp(-10)
+    False
     """
 
     global hp
@@ -91,6 +102,9 @@ def get_coordinates():
     Return character coordinates.
 
     RETURN character coordinates x and y in integer
+
+    >>> get_coordinates()
+    (29, 16)
     """
 
     return coordinates

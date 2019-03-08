@@ -23,7 +23,7 @@ def reset():
     POST-CONDITION Set monster hp to max hp
     """
 
-    set_hp(MAX_HP())
+    modify_hp(MAX_HP())
 
 
 def MAX_HP():
@@ -31,6 +31,9 @@ def MAX_HP():
     Max hp constant.
 
     RETURN character coordinates x and y in integer
+
+    >>> MAX_HP()
+    5
     """
 
     return 5
@@ -41,12 +44,15 @@ def get_hp():
     Return character's current hp.
 
     RETURN character's current hp
+
+    >>> get_hp()
+    5
     """
 
     return hp
 
 
-def set_hp(change_amount):
+def modify_hp(change_amount):
     """
     Change character's current hp by change amount specified.
 
@@ -55,6 +61,11 @@ def set_hp(change_amount):
     POST-CONDITION change character hp by the change amount
     RETURN True if hp is not 0
     RETURN False if hp is 0
+
+    >>> modify_hp(10)
+    True
+    >>> modify_hp(-10)
+    False
     """
 
     global hp

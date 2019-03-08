@@ -59,10 +59,10 @@ def is_impassable(x, y):
     PARAM zero or positive integer representing y coordinate of tile
     RETURN True if the tile can be traversed by player
 
-    >>> is_impassable(0, 0)
-    False
-    >>> is_impassable(1, 1)
+    >>> is_impassable(0, 5)
     True
+    >>> is_impassable(1, 5)
+    False
     """
 
     impassable = "-|"
