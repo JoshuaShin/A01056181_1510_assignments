@@ -15,7 +15,7 @@ import map
 
 
 hp = 10
-coordinates = (2, 2)
+coordinates = (30, 10)
 
 
 def reset():
@@ -29,7 +29,7 @@ def reset():
     global hp
     global coordinates
     hp = 10
-    coordinates = (2, 2)
+    coordinates = (29, 15)
 
 
 def MAX_HP():

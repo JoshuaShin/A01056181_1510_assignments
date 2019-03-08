@@ -13,6 +13,9 @@ Map and associated functions for SUD.
 import doctest
 
 
+game_map = []
+
+
 def get_map():
     """
     Return the initial 2D array of strings representing the map of the dungeon.
@@ -20,11 +23,13 @@ def get_map():
     RETURN 2D array of strings representing the map of the dungeon
     """
 
-    return [[' ', '-', '-', '-', ' '],
-            ['|', ' ', ' ', ' ', '|'],
-            ['|', ' ', ' ', ' ', '|'],
-            ['|', ' ', ' ', ' ', '|'],
-            [' ', '-', '-', '-', ' ']]
+    if game_map:
+        return game_map
+    else:
+        with open("map.txt") as file_object:
+            for line in file_object.readlines():
+                game_map.append(list(line))
+        return game_map
 
 
 def print_map(character_coordinate):
@@ -40,10 +45,10 @@ def print_map(character_coordinate):
     for y in range(len(get_map())):
         for x in range(len(get_map()[y])):
             if char_x == x and char_y == y:
-                print('☹', end=' ')
+                print('🚀', end=' ')
             else:
                 print(get_map()[y][x], end=' ')
-        print('')
+    print()
 
 
 def is_impassable(x, y):

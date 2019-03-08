@@ -63,19 +63,19 @@ def combat():
     print("--- COMBAT STARTS ---")
 
     while True:
-        print("YOUR HP:", character.get_hp(), "\nMONSTER HP:", monster.get_hp())
+        print("YOUR STRUCTURAL INTEGRITY:", character.get_hp(), "\nENEMY STRUCTURAL INTEGRITY:", monster.get_hp())
         input("--- PRESS ANY KEY TO CONTINUE ---")
 
         character_roll = roll_die(1, 6)
-        print("CHARACTER ROLLS:", character_roll, "ATTACK")
+        print("USS ENTERPRISE FIRES:", character_roll, "PHOTON TORPEDO(ES)")
         if not monster.set_hp(-character_roll):
-            print("MONSTER HP: 0", "\nMONSTER SLAIN", "\n--- COMBAT ENDS ---")
+            print("ENEMY STRUCTURAL INTEGRITY: 0", "\nENEMY DESTROYED", "\n--- COMBAT ENDS ---")
             return True
 
         monster_roll = roll_die(1, 6)
-        print("MONSTER ROLLS:", monster_roll, "ATTACK")
+        print("BIRD OF PREY FIRES:", monster_roll, "PHOTON TORPEDO(ES)")
         if not character.modify_hp(-monster_roll):
-            print("MONSTER HP:", monster.get_hp(), "\nYOUR HP: 0", "\nYOU DIED")
+            print("ENEMY STRUCTURAL INTEGRITY:", monster.get_hp(), "\nYOUR STRUCTURAL INTEGRITY: 0", "\nDEFEATED")
             return False
 
 
@@ -88,7 +88,20 @@ def combat_flee():
     RETURN False if user fights
     """
 
-    print("--- MONSTER ENCOUNTER ---")
+    print("--- ENEMY ENCOUNTER ---")
+    print("""
+                            _------_        _------_
+                           / /~~~~~~~\----/~~~~~~~\ \\
+                        __|_|    /~ _-~~~~-_ ~\    |_|__
+                  __--~~____|   |  /________\  |   |____~~--__
+            __--~~__--~~     ~---__\   ()   /__---~     ~~--__~~--__
+         /~~__--~~                  ~--__--~                  ~~--__~~\\
+       / /~~                                                        ~~\ \\
+     / /                                                                \ \\
+    (0)                                                                  (0)
+                    K L I N G O N   B I R D   O F   P R E Y
+    
+    """)
     while True:
         user_input = input("FIGHT? (y/n)").strip().lower()
         if user_input == "y":
@@ -107,15 +120,15 @@ def combat_flee_damage():
     POST-CONDITION 10% chance character takes damage from fleeing
     """
 
-    if random.random() < 1:
+    if random.random() < 0.1:
         monster_roll = roll_die(1, 4)
-        print("--- FLEE PENALTY ---", "\nMONSTER ROLLS:", monster_roll, "ATTACK")
+        print("--- WARP OUT PENALTY ---", "\nBIRD OF PREY FIRES:", monster_roll, "PHOTON TORPEDO(ES)")
         if not character.modify_hp(-monster_roll):
-            print("YOUR HP: 0", "\nYOU DIED")
+            print("YOUR STRUCTURAL INTEGRITY: 0", "\nYOU ARE DESTROYED")
         else:
-            print("YOUR HP:", character.get_hp())
+            print("YOUR STRUCTURAL INTEGRITY:", character.get_hp())
     else:
-        print("FLED SAFELY")
+        print("WARPED OUT SAFELY")
 
 
 def main():

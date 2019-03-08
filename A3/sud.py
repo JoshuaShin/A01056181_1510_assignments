@@ -28,9 +28,64 @@ def print_introduction():
     """
 
     print("""
-    You are stuck in an incredibly dull dungeon with no exits. ☹
-    You are filled to the brim with excitement at the prospect of exploring all 9 identical tiles.  ♪~ ᕕ(ᐛ)ᕗ
-    Valid commands: n, w, s, e, quit, restart.
+          ____ _____      _______
+         / __//_  _/ ,/| /____   )
+        ( (    / / ,/  |   __ ) /
+         \ \  / /,/ _  |  / // /
+      ____) )/ //,-' `.| / / \ \\
+     /_____//_///     ||/_/   \ \_ ______ ______     ______  __   __
+                               \_//_  __//___   )   / ____/ / /  / /
+                                   / /    __ ) /   / /_    / / /'/'
+                                  / /    / // /   / ___|  / //'/'
+                                 / /    / / \ \  / /____ / / \ \\
+                                /_/    /_/   \ \/______//_/   \_\\
+                                              \/    
+
+    ♪♫♬ PLEASE PLAY ON YOUTUBE STAR TREK: NEXT GENERATION THEME ♪♫♬
+
+
+
+    Space... the final frontier...!\n
+    
+    These are the voyages of the starship Enterprise.\n
+    
+    Its continuing mission:\n
+    
+    To explore strange new worlds,\n 
+    
+    To seek out new life and new civilizations,\n
+    
+    To boldly go where no one has gone before...!\n
+    
+
+
+    YOU COMMAND:
+    
+                                                  _______----_______
+                                       ___---~~~~~.. ... .... ... ..~~~~~---___
+                                 _ ==============================================
+     __________________________ - .. ..   _--~~~~~-------____-------~~~~~
+    (______________________][__)____     -
+       /       /______---~~~.. .. ..~~-_~
+      <_______________________________-
+          ~~~~~~~-----__           __-
+                        ~~~~~~~~~~~
+
+
+                    _____.-----._____
+       ___----~~~~~~. ... ..... ... .~~~~~~----___
+    =================================================
+       ~~~-----......._____________.......-----~~~
+        (____)          \   |   /          (____)
+          ||           _/   |   \_           ||
+           \\\_______--~  //~~~\\\  ~--_______//
+            `~~~~---__   \\\___//   __---~~~~'
+                      ~~-_______-~~
+
+               U S S   E N T E R P R I S E
+    
+    
+    VALID COMMANDS: n, w, s, e, quit, restart.
     """)
 
 
@@ -40,7 +95,7 @@ def game_over():
 
     POST-CONDITION game over message is printed
     """
-
+    print("...THIS IS THE BRIDGE... ALL HANDS ABANDON SHIP... I REPEAT... ALL HANDS.. ABANDO... ... ...")
     print("GAME OVER")
     character.reset()
 
@@ -94,8 +149,8 @@ def load_game():
     char = save.read_data()
     character.set_hp(char['hp'])
     character.set_coordinates(char['x'], char['y'])
-    print("YOUR HP:", character.get_hp())
-    print("YOUR COORDINATES:", character.get_coordinates())
+    # print("YOUR HP:", character.get_hp())
+    # print("YOUR COORDINATES:", character.get_coordinates())
 
 
 def play_game():
@@ -121,14 +176,13 @@ def play_game():
         if not character.move(player_input.strip().lower()):
             print("INVALID INPUT")
             continue
-        print("You find absolutely nothing of interest in this tile.")
         map.print_map(character.get_coordinates())
         # Heal
         if character.get_hp() < character.MAX_HP():
             character.modify_hp(1)
-            print("HEALED 1 HP", "\nYOUR HP:", character.get_hp())
+            print("STRUCTURAL INTEGRITY +1 POINT", "\nYOUR STRUCTURAL INTEGRITY:", character.get_hp())
         # Combat
-        if random.random() < 1:
+        if random.random() < 0.1:
             if not combat.combat():
                 game_over()
                 break
