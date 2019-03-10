@@ -12,28 +12,41 @@ Handles game data saving.
 
 import doctest
 import json
+import character
 
 
-def read_data():
+def load_game():
     """
-    Read data from character.json.
+    Load character data from character.json.
 
-    RETURN dictionary of character data
+    POST-CONDITION character data is loaded and character is updated
     """
 
-    with open('character.json') as file_object:
-        return json.load(file_object)
+    try:
+        with open('character.json') as file_object:
+            char = json.load(file_object)
+            character.set_hp(char['hp'])
+            character.set_coordinates(char['x'], char['y'])
+
+    except FileNotFoundError:
+        char = {"hp": 10, "x": 29, "y": 16}
+        character.set_hp(char['hp'])
+        character.set_coordinates(char['x'], char['y'])
 
 
-def write_data(dictionary):
+def save_game():
     """
-    Save data to character.json.
+    Save character data to character.json.
 
     POST-CONDITION character data is saved to character.json
     """
 
+    character_dictionary = {'hp': character.get_hp(),
+                            'x': character.get_coordinates()[0],
+                            'y': character.get_coordinates()[1]}
+
     with open('character.json', 'w') as file_object:
-        json.dump(dictionary, file_object, sort_keys=True, indent=4)
+        json.dump(character_dictionary, file_object, sort_keys=True, indent=4)
 
 
 def main():

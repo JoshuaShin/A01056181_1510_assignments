@@ -110,7 +110,7 @@ def combat_flee():
             combat_flee_damage()
             return True
         else:
-            print("INVALID INPUT")
+            print("INVALID COMMAND")
 
 
 def combat_flee_damage():

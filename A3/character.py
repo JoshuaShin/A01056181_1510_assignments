@@ -132,12 +132,11 @@ def move(direction):
     PARAM string containing cardinal direction
     PRE-CONDITION string containing single cardinal direction - 'north', 'west', 'south', 'east'
     POST-CONDITION move character coordinate North, East, South, or West
-    RETURN True if character is moved
     """
 
     global coordinates
     current_x, current_y = coordinates
-
+    destination_x, destination_y = coordinates
     if direction == 'north' or direction == 'n':
         destination_x = current_x
         destination_y = current_y - 1
@@ -151,13 +150,11 @@ def move(direction):
         destination_x = current_x + 1
         destination_y = current_y
     else:
-        return False
-
+        print("INVALID COMMAND")
     if map.is_impassable(destination_x, destination_y):
-        return False
+        print("OUT OF BOUND")
     else:
         coordinates = (destination_x, destination_y)
-        return True
 
 
 def main():

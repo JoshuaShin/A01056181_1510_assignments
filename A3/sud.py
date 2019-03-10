@@ -94,23 +94,12 @@ def game_over():
     End the game.
 
     POST-CONDITION game over message is printed
+    POST-CONDITION program terminates
     """
     print("...THIS IS THE BRIDGE... ALL HANDS ABANDON SHIP... I REPEAT... ALL HANDS.. ABANDO... ... ...")
     print("GAME OVER")
     character.reset()
-
-
-def restart_game():
-    """
-    Restart the game.
-
-    POST-CONDITION character is reset and restart message is printed
-    """
-
-    print("RESTART GAME")
-    character.reset()
-    save_game()
-    play_game()
+    quit()
 
 
 def quit_game():
@@ -122,33 +111,51 @@ def quit_game():
     POST-CONDITION program terminates
     """
 
-    save_game()
+    save.save_game()
     print("GAME SAVED")
     quit()
 
 
-def save_game():
+def restart_game():
     """
-    Save character data to character.json.
+    Restart the game.
 
-    POST-CONDITION character data is saved
-    """
-
-    save.write_data({'hp': character.get_hp(),
-                     'x': character.get_coordinates()[0],
-                     'y': character.get_coordinates()[1]})
-
-
-def load_game():
-    """
-    Load character data from character.json.
-
-    POST-CONDITION character data is loaded and character is updated
+    POST-CONDITION restart message is printed
+    POST-CONDITION game is restarted
     """
 
-    char = save.read_data()
-    character.set_hp(char['hp'])
-    character.set_coordinates(char['x'], char['y'])
+    print("RESTART GAME")
+    character.reset()
+    play_game()
+
+
+def start_game():
+    """
+    Start the game.
+
+    POST-CONDITION load game
+    POST-CONDITION begin game play loop
+    """
+
+    save.load_game()
+    play_game()
+
+
+def game_event():
+    """
+    Process the game play loop.
+
+    POST-CONDITION make appropriate changes to character and monster according to events
+    """
+
+    # Heal
+    if character.get_hp() < character.MAX_HP():
+        character.modify_hp(1)
+        print("STRUCTURAL INTEGRITY +1 POINT", "\nYOUR STRUCTURAL INTEGRITY:", character.get_hp())
+    # Combat
+    if random.random() < 0.1:
+        if not combat.combat():
+            game_over()
 
 
 def play_game():
@@ -159,10 +166,9 @@ def play_game():
     """
 
     print_introduction()
-    load_game()
     map.print_map(character.get_coordinates())
     while True:
-        player_input = input(">>> ")
+        player_input = input("YOUR COMMAND, CAPTAIN: ")
         # Quit
         if player_input.strip().lower() == 'quit':
             quit_game()
@@ -171,19 +177,10 @@ def play_game():
             restart_game()
             break
         # Move
-        if not character.move(player_input.strip().lower()):
-            print("INVALID INPUT")
-            continue
+        character.move(player_input.strip().lower())
+        # Heal & Combat
+        game_event()
         map.print_map(character.get_coordinates())
-        # Heal
-        if character.get_hp() < character.MAX_HP():
-            character.modify_hp(1)
-            print("STRUCTURAL INTEGRITY +1 POINT", "\nYOUR STRUCTURAL INTEGRITY:", character.get_hp())
-        # Combat
-        if random.random() < 0.1:
-            if not combat.combat():
-                game_over()
-                break
 
 
 def main():
