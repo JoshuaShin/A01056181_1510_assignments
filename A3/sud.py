@@ -96,7 +96,8 @@ def game_over():
     POST-CONDITION game over message is printed
     POST-CONDITION program terminates
     """
-    print("...THIS IS THE BRIDGE... ALL HANDS ABANDON SHIP... I REPEAT... ALL HANDS.. ABANDO... ... ...")
+
+    print("...THIS IS THE BRIDGE... ALL HANDS ABANDON SHIP... ... ...")
     print("GAME OVER")
     character.reset()
     quit()

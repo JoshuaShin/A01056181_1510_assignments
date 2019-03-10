@@ -58,10 +58,8 @@ def combat():
             return True
         else:
             return False
-
     monster.reset()
     print("--- COMBAT STARTS ---")
-
     while True:
         print("YOUR STRUCTURAL INTEGRITY:", character.get_hp(), "\nENEMY STRUCTURAL INTEGRITY:", monster.get_hp())
         input("--- PRESS ANY KEY TO CONTINUE ---")
@@ -71,7 +69,6 @@ def combat():
         if not monster.modify_hp(-character_roll):
             print("ENEMY STRUCTURAL INTEGRITY: 0", "\nENEMY DESTROYED", "\n--- COMBAT ENDS ---")
             return True
-
         monster_roll = roll_die(1, 6)
         print("BIRD OF PREY FIRES:", monster_roll, "PHOTON TORPEDO(ES)")
         if not character.modify_hp(-monster_roll):
@@ -88,8 +85,7 @@ def combat_flee():
     RETURN False if user fights
     """
 
-    print("--- ENEMY ENCOUNTER ---")
-    print("""
+    print("""--- ENEMY ENCOUNTER ---\n
                             _------_        _------_
                            / /~~~~~~~\----/~~~~~~~\ \\
                         __|_|    /~ _-~~~~-_ ~\    |_|__
@@ -99,8 +95,7 @@ def combat_flee():
        / /~~                                                        ~~\ \\
      / /                                                                \ \\
     (0)                                                                  (0)
-                    K L I N G O N   B I R D   O F   P R E Y
-    
+                    K L I N G O N   B I R D   O F   P R E Y\n
     """)
     while True:
         user_input = input("FIGHT? (y/n)").strip().lower()
