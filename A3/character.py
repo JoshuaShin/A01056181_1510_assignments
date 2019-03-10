@@ -18,6 +18,19 @@ hp = 10
 coordinates = (29, 16)
 
 
+def MAX_HP():
+    """
+    Max hp constant.
+
+    RETURN character coordinates x and y in integer
+
+    >>> MAX_HP()
+    10
+    """
+
+    return 10
+
+
 def reset():
     """
     Reset character.
@@ -30,19 +43,6 @@ def reset():
     global coordinates
     hp = 10
     coordinates = (29, 16)
-
-
-def MAX_HP():
-    """
-    Max hp constant.
-
-    RETURN character coordinates x and y in integer
-
-    >>> MAX_HP()
-    10
-    """
-
-    return 10
 
 
 def get_hp():

@@ -156,6 +156,7 @@ def game_event():
     if random.random() < 0.1:
         if not combat.combat():
             game_over()
+    map.print_map(character.get_coordinates())
 
 
 def play_game():
@@ -180,7 +181,6 @@ def play_game():
         character.move(player_input.strip().lower())
         # Heal & Combat
         game_event()
-        map.print_map(character.get_coordinates())
 
 
 def main():

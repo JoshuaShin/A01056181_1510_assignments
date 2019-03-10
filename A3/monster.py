@@ -16,16 +16,6 @@ import doctest
 hp = 5
 
 
-def reset():
-    """
-    Reset monster.
-
-    POST-CONDITION Set monster hp to max hp
-    """
-
-    modify_hp(MAX_HP())
-
-
 def MAX_HP():
     """
     Max hp constant.
@@ -37,6 +27,16 @@ def MAX_HP():
     """
 
     return 5
+
+
+def reset():
+    """
+    Reset monster.
+
+    POST-CONDITION Set monster hp to max hp
+    """
+
+    modify_hp(MAX_HP())
 
 
 def get_hp():
