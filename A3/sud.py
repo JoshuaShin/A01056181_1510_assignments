@@ -149,14 +149,15 @@ def game_event():
     POST-CONDITION make appropriate changes to character and monster according to events
     """
 
-    # Heal
-    if character.get_hp() < character.MAX_HP():
-        character.modify_hp(1)
-        print("STRUCTURAL INTEGRITY +1 POINT", "\nYOUR STRUCTURAL INTEGRITY:", character.get_hp())
     # Combat
     if random.random() < 0.1:
         if not combat.combat():
             game_over()
+    else:
+        # Heal
+        if character.get_hp() < character.MAX_HP():
+            character.modify_hp(1)
+            print("STRUCTURAL INTEGRITY +1 POINT", "\nYOUR STRUCTURAL INTEGRITY:", character.get_hp())
     map.print_map(character.get_coordinates())
 
 
@@ -179,9 +180,8 @@ def play_game():
             restart_game()
             break
         # Move
-        character.move(player_input.strip().lower())
-        # Heal & Combat
-        game_event()
+        if character.move(player_input.strip().lower()):
+            game_event()
 
 
 def main():

@@ -132,29 +132,29 @@ def move(direction):
     PARAM string containing cardinal direction
     PRE-CONDITION string containing single cardinal direction - 'north', 'west', 'south', 'east'
     POST-CONDITION move character coordinate North, East, South, or West
+    RETURN True if character is moved
     """
 
     global coordinates
     current_column, current_row = coordinates
     destination_column, destination_row = coordinates
     if direction == 'north' or direction == 'n':
-        destination_column = current_column
         destination_row = current_row - 1
     elif direction == 'west' or direction == 'w':
         destination_column = current_column - 1
-        destination_row = current_row
     elif direction == 'south' or direction == 's':
-        destination_column = current_column
         destination_row = current_row + 1
     elif direction == 'east' or direction == 'e':
         destination_column = current_column + 1
-        destination_row = current_row
     else:
         print("INVALID COMMAND")
+        return False
     if map.is_impassable(destination_column, destination_row):
         print("OUT OF BOUND")
+        return False
     else:
         coordinates = (destination_column, destination_row)
+        return True
 
 
 def main():
