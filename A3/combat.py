@@ -63,11 +63,11 @@ def combat():
     while True:
         print("YOUR STRUCTURAL INTEGRITY:", character.get_hp(), "\nENEMY STRUCTURAL INTEGRITY:", monster.get_hp())
         input("--- PRESS ANY KEY TO CONTINUE ---")
-
         character_roll = roll_die(1, 6)
         print("USS ENTERPRISE FIRES:", character_roll, "PHOTON TORPEDO(ES)")
         if not monster.modify_hp(-character_roll):
             print("ENEMY STRUCTURAL INTEGRITY: 0", "\nENEMY DESTROYED", "\n--- COMBAT ENDS ---")
+            input("--- PRESS ANY KEY TO CONTINUE ---")
             return True
         monster_roll = roll_die(1, 6)
         print("BIRD OF PREY FIRES:", monster_roll, "PHOTON TORPEDO(ES)")
