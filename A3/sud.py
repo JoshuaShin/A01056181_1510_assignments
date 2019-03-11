@@ -186,7 +186,7 @@ def play_game():
 
 def main():
     doctest.testmod()
-    play_game()
+    start_game()
 
 
 if __name__ == "__main__":
