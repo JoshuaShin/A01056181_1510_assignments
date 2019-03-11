@@ -14,8 +14,7 @@ class TestGameOver(TestCase):
             pass
         self.assertTrue("GAME OVER" in mock_stdout.getvalue())
 
-    @patch('sys.stdout', new_callable=io.StringIO)
-    def test_game_over_reset(self, mock_stdout):
+    def test_game_over_reset(self):
         character.set_hp(0)
         try:
             game_over()

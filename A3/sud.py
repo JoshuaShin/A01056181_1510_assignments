@@ -170,6 +170,7 @@ def play_game():
     print_introduction()
     map.print_map(character.get_coordinates())
     while True:
+        print("??")
         player_input = input("YOUR COMMAND, CAPTAIN: ")
         # Quit
         if player_input.strip().lower() == 'quit':

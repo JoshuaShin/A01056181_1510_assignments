@@ -15,8 +15,7 @@ class TestQuitGame(TestCase):
             pass
         self.assertTrue("GAME SAVED" in mock_stdout.getvalue())
 
-    @patch('sys.stdout', new_callable=io.StringIO)
-    def test_quit_game_save_game(self, mock_stdout):
+    def test_quit_game_save_game(self):
         character.set_hp(5)
         try:
             quit_game()
