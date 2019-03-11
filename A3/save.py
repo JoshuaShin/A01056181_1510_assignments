@@ -26,12 +26,12 @@ def load_game():
         with open('character.json') as file_object:
             char = json.load(file_object)
             character.set_hp(char['hp'])
-            character.set_coordinates(char['x'], char['y'])
+            character.set_coordinates(char['column'], char['row'])
 
     except FileNotFoundError:
-        char = {"hp": 10, "x": 29, "y": 16}
+        char = {"hp": 10, "column": 29, "row": 16}
         character.set_hp(char['hp'])
-        character.set_coordinates(char['x'], char['y'])
+        character.set_coordinates(char['column'], char['row'])
 
 
 def save_game():
@@ -42,8 +42,8 @@ def save_game():
     """
 
     character_dictionary = {'hp': character.get_hp(),
-                            'x': character.get_coordinates()[0],
-                            'y': character.get_coordinates()[1]}
+                            'column': character.get_coordinates()[0],
+                            'row': character.get_coordinates()[1]}
 
     with open('character.json', 'w') as file_object:
         json.dump(character_dictionary, file_object, sort_keys=True, indent=4)

@@ -36,27 +36,27 @@ def print_map(character_coordinate):
     """
     Print the map and mark the player location.
 
-    PARAM tuple containing x and y coordinate of player
+    PARAM tuple containing column and row coordinate of player
     PRE-CONDITION player coordinate is within the map boundaries
     POST-CONDITION map and player location is printed
     """
 
-    char_x, char_y = character_coordinate
-    for y in range(len(get_map())):
-        for x in range(len(get_map()[y])):
-            if char_x == x and char_y == y:
+    char_column, char_row = character_coordinate
+    for row in range(len(get_map())):
+        for column in range(len(get_map()[row])):
+            if char_column == column and char_row == row:
                 print('🚀', end=' ')
             else:
-                print(get_map()[y][x], end=' ')
+                print(get_map()[row][column], end=' ')
     print()
 
 
-def is_impassable(x, y):
+def is_impassable(column, row):
     """
     Return True if the tile can be traversed by player.
 
-    PARAM zero or positive integer representing x coordinate of tile
-    PARAM zero or positive integer representing y coordinate of tile
+    PARAM zero or positive integer representing column coordinate of tile
+    PARAM zero or positive integer representing row coordinate of tile
     RETURN True if the tile can be traversed by player
 
     >>> is_impassable(0, 5)
@@ -67,7 +67,7 @@ def is_impassable(x, y):
 
     impassable = "-|"
 
-    if get_map()[y][x] in impassable:
+    if get_map()[row][column] in impassable:
         return True
     else:
         return False

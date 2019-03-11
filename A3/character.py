@@ -110,9 +110,9 @@ def get_coordinates():
     return coordinates
 
 
-def set_coordinates(x, y):
+def set_coordinates(column, row):
     """
-    Set character coordinates to x and y.
+    Set character coordinates to column and row.
 
     PARAM is positive integer
     PARAM is positive integer
@@ -122,7 +122,7 @@ def set_coordinates(x, y):
     """
 
     global coordinates
-    coordinates = (x, y)
+    coordinates = (column, row)
 
 
 def move(direction):
@@ -135,26 +135,26 @@ def move(direction):
     """
 
     global coordinates
-    current_x, current_y = coordinates
-    destination_x, destination_y = coordinates
+    current_column, current_row = coordinates
+    destination_column, destination_row = coordinates
     if direction == 'north' or direction == 'n':
-        destination_x = current_x
-        destination_y = current_y - 1
+        destination_column = current_column
+        destination_row = current_row - 1
     elif direction == 'west' or direction == 'w':
-        destination_x = current_x - 1
-        destination_y = current_y
+        destination_column = current_column - 1
+        destination_row = current_row
     elif direction == 'south' or direction == 's':
-        destination_x = current_x
-        destination_y = current_y + 1
+        destination_column = current_column
+        destination_row = current_row + 1
     elif direction == 'east' or direction == 'e':
-        destination_x = current_x + 1
-        destination_y = current_y
+        destination_column = current_column + 1
+        destination_row = current_row
     else:
         print("INVALID COMMAND")
-    if map.is_impassable(destination_x, destination_y):
+    if map.is_impassable(destination_column, destination_row):
         print("OUT OF BOUND")
     else:
-        coordinates = (destination_x, destination_y)
+        coordinates = (destination_column, destination_row)
 
 
 def main():
