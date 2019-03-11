@@ -10,6 +10,9 @@ class TestCharacterMove(TestCase):
         character.move("bad input")
         self.assertTrue("INVALID COMMAND" in mock_stdout.getvalue())
 
+    def test_move_invalid_input_return(self):
+        self.assertEqual(False, character.move("bad input"))
+
     def test_move_north_valid(self):
         character.set_coordinates(10, 10)
         character.move("north")
@@ -30,8 +33,16 @@ class TestCharacterMove(TestCase):
         character.move("east")
         self.assertEqual((11, 10), character.coordinates)
 
+    def test_move_valid_return(self):
+        character.set_coordinates(10, 10)
+        self.assertEqual(True, character.move("north"))
+
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_move_out_of_bound(self, mock_stdout):
         character.set_coordinates(1, 4)
         character.move("west")
         self.assertTrue("OUT OF BOUND" in mock_stdout.getvalue())
+
+    def test_move_out_of_bound_return(self):
+        character.set_coordinates(1, 4)
+        self.assertEqual(False, character.move("west"))
