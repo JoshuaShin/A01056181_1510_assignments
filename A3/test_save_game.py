@@ -13,4 +13,4 @@ class TestSaveGame(TestCase):
         with open('character.json') as file_object:
             current_character = json.load(file_object)
 
-        self.assertEqual({"hp": 6, "x": 21, "y": 21}, current_character)
+        self.assertEqual({"hp": 6, "column": 21, "row": 21}, current_character)
