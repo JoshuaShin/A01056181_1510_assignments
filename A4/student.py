@@ -3,7 +3,7 @@ class Student:
     Student class.
     """
 
-    def __init__(self, first_name: str, last_name: str, student_number: str):
+    def __init__(self, first_name: str, last_name: str, student_number: str, probation: bool, grades: list):
         self.__first_name = None
         self.set_first_name(first_name)
 
@@ -13,8 +13,11 @@ class Student:
         self.__student_number = None
         self.__set_student_number(student_number)
 
-        self.__probation = False
+        self.__probation = None
+        self.set_probation_status(probation)
+
         self.__final_grades = []
+        self.set_final_grade(grades)
 
     def __str__(self):
         return "First name: " + str(self.__first_name) \
@@ -49,19 +52,28 @@ class Student:
         elif not student_number[1:9].isdigit():
             raise ValueError("student number must have 8 numbers following character")
         else:
-            self.__student_number = student_number
+            self.__student_number = student_number.title()
 
     def get_student_number(self):
         return self.__student_number
 
-    def set_status(self, probation: bool):
+    def set_probation_status(self, probation: bool):
         self.__probation = probation
 
-    def get_status(self):
+    def get_probation_status(self):
         return self.__probation
 
-    def add_final_grade(self, final_grade: float):
-        self.__final_grades.append(final_grade)
+    def add_final_grade(self, final_grade):
+        if not(type(final_grade) == float or type(final_grade) == int):
+            raise ValueError("grade must a number")
+        elif not 0 <= final_grade <= 100:
+            raise ValueError("grade must be between 0 and 100")
+        else:
+            self.__final_grades.append(round(final_grade, 2))
+
+    def set_final_grade(self, final_grades: list):
+        for final_grade in final_grades:
+            self.add_final_grade(final_grade)
 
     def get_final_grade(self):
         return self.__final_grades

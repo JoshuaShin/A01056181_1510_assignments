@@ -11,6 +11,37 @@ Student Management System can be used to create, read, update and delete student
 import student
 
 
+def file_write():
+    pass
+
+
+def file_read():
+    try:
+        with open("students.txt") as file_object:
+            student_list = []
+            for line in file_object.readlines():
+                student_list.append(line_to_student(line))
+            return student_list
+    except FileNotFoundError:
+        return []
+
+
+def line_to_student(line: str):
+    student_info = line.split()
+    first_name = student_info[0]
+    last_name = student_info[1]
+    student_number = student_info[2]
+    if student_info[3] == "True":
+        probation = True
+    else:
+        probation = False
+    if len(student_info) == 4:
+        grades = []
+    else:
+        grades = student_info[4:]
+    return student.Student(first_name, last_name, student_number, probation, grades)
+
+
 def add_student():
     print("===== Add Student =====")
     first_name = input("Input first name: ")
