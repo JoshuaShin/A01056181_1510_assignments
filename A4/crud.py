@@ -11,8 +11,9 @@ Student Management System can be used to create, read, update and delete student
 import student
 
 
-def file_write():
-    pass
+def file_write(new_student):
+    with open("students.txt", "a") as file_object:
+        file_object.write(new_student)
 
 
 def file_read():
