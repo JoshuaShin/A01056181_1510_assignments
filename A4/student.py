@@ -17,16 +17,17 @@ class Student:
         self.__final_grades = []
 
     def __str__(self):
-        return "Student:" + str(self.__first_name) + " " + str(self.__last_name) \
-               + " student number: " + str(self.__student_number) \
-               + " probation: " + str(self.__probation) \
-               + " grades: " + str(self.__final_grades)
+        return "First name: " + str(self.__first_name) \
+               + ", Last name: " + str(self.__last_name) \
+               + ", Student number: " + str(self.__student_number) \
+               + ", Probation: " + str(self.__probation) \
+               + ", Grades: " + str(self.__final_grades)
 
     def set_first_name(self, first_name: str):
         if len(first_name.strip()) == 0:  # TODO: CHECK IS ALPHA?
             raise ValueError("name cannot be whitespace or blank")
         else:
-            self.__first_name = first_name
+            self.__first_name = first_name.title()
 
     def get_first_name(self):
         return self.__first_name
@@ -35,7 +36,7 @@ class Student:
         if len(last_name.strip()) == 0:  # TODO: CHECK IS ALPHA?
             raise ValueError("name cannot be whitespace or blank")
         else:
-            self.__last_name = last_name
+            self.__last_name = last_name.title()
 
     def get_last_name(self):
         return self.__last_name
