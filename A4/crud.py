@@ -72,6 +72,7 @@ def calculate_class_average():
 
 def print_class_list():
     print("===== Print Class List =====")
+    print(*file_read(), sep='\n')
 
 
 def quit_program():
