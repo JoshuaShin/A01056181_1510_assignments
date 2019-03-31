@@ -20,11 +20,11 @@ class Student:
         self.set_final_grade(grades)
 
     def __str__(self):
-        return "First name: " + str(self.__first_name) \
-               + ", Last name: " + str(self.__last_name) \
-               + ", Student number: " + str(self.__student_number) \
-               + ", Probation: " + str(self.__probation) \
-               + ", Grades: " + str(self.__final_grades)
+        return ' '.join((self.__first_name,
+                         self.__last_name,
+                         self.__student_number,
+                         str(self.__probation),
+                         ' '.join(str(grade) for grade in self.__final_grades)))
 
     def set_first_name(self, first_name: str):
         if len(first_name.strip()) == 0:  # TODO: CHECK IS ALPHA?

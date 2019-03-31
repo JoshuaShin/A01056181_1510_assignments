@@ -13,7 +13,7 @@ import student
 
 def file_write(new_student):
     with open("students.txt", "a") as file_object:
-        file_object.write(new_student)
+        file_object.write(str(new_student) + '\n')
 
 
 def file_read():
@@ -21,13 +21,13 @@ def file_read():
         with open("students.txt") as file_object:
             student_list = []
             for line in file_object.readlines():
-                student_list.append(line_to_student(line))
+                student_list.append(string_to_student(line))
             return student_list
     except FileNotFoundError:
         return []
 
 
-def line_to_student(line: str):
+def string_to_student(line: str):
     student_info = line.split()
     first_name = student_info[0]
     last_name = student_info[1]
@@ -39,7 +39,7 @@ def line_to_student(line: str):
     if len(student_info) == 4:
         grades = []
     else:
-        grades = student_info[4:]
+        grades = [int(grade) for grade in student_info[4:]]
     return student.Student(first_name, last_name, student_number, probation, grades)
 
 
@@ -48,15 +48,18 @@ def add_student():
     first_name = input("Input first name: ")
     last_name = input("Input last name: ")
     student_number = input("Input student number: ")
+    probation = "False"  # input("Input probation status: ")
+    grades = "1 2 3 4 5"
 
     try:
-        student_instance = student.Student(first_name, last_name, student_number)
+        print(' '.join((first_name, last_name, student_number, probation, grades)))
+        student_instance = string_to_student(' '.join((first_name, last_name, student_number, probation, grades)))
     except ValueError as e:
         print("ERROR:", e)
     else:
-        # TODO: WRITE STUDENT_INSTANCE TO FILE
-        print("Student successfully added")
+        file_write(student_instance)
         print(student_instance)
+        print("Student successfully added")
 
 
 def delete_student():
