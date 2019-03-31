@@ -113,12 +113,16 @@ def delete_student():
 def calculate_class_average():
     print("===== Calculate Class Average =====")
     students = file_read()
+    total_grades = 0
+    total_students = 0
+    for student in students:
+        if student.get_gpa() is not None:
+            total_grades += student.get_gpa()
+            total_students += 1
     try:
-        print("Class average:"
-              , sum((student.get_gpa() for student in students if student.get_gpa() is not None)) / len(students))
+        print("Class average:", total_grades / total_students)
     except ZeroDivisionError:
         print("Database is empty")
-    # TODO: IS THIS CORRECT GPA CALCULATION?
 
 
 def print_class_list():
