@@ -11,7 +11,23 @@ Student Management System can be used to create, read, update and delete student
 from student import Student
 
 
-def file_write(new_student):
+def file_delete_student(student_number):
+    deleted = False
+
+    if len(student_number) == 9:
+        with open("students.txt", "r+") as file_object:
+            lines = file_object.readlines()
+            file_object.truncate(0)
+            for line in lines:
+                if student_number + ' ' not in line:
+                    file_object.write(line)
+                else:
+                    deleted = True
+
+    return deleted
+
+
+def file_append_student(new_student):
     with open("students.txt", "a") as file_object:
         file_object.write(str(new_student) + '\n')
 
@@ -33,14 +49,14 @@ def string_to_student(line: str):
     last_name = student_info[1]
     student_number = student_info[2]
     if student_info[3] == "True":
-        probation = True
+        good_standing = True
     else:
-        probation = False
+        good_standing = False
     if len(student_info) == 4:
         grades = []
     else:
         grades = [int(grade) for grade in student_info[4:]]
-    return Student(first_name, last_name, student_number, probation, grades)
+    return Student(first_name, last_name, student_number, good_standing, grades)
 
 
 def add_student():
@@ -48,20 +64,28 @@ def add_student():
     first_name = input("Input first name: ")
     last_name = input("Input last name: ")
     student_number = input("Input student number: ")
-    probation = "False"  # input("Input probation status: ")
+    good_standing = "False"  # input("Input good_standing status: ")
     grades = "1 2 3 4 5"
+
     try:
-        student_instance = string_to_student(' '.join((first_name, last_name, student_number, probation, grades)))
+        student_instance = string_to_student(' '.join((first_name, last_name, student_number, good_standing, grades)))
     except ValueError as e:
         print("ERROR:", e)
     else:
-        file_write(student_instance)
-        print(student_instance)
+        file_append_student(student_instance)
+        # print(student_instance)
         print("Student successfully added")
 
 
 def delete_student():
     print("===== Delete Student =====")
+    student_number = input("Student number: ").strip().title()
+    deleted = file_delete_student(student_number)
+
+    if deleted:
+        print(student_number, "deleted from database")
+    else:
+        print(student_number, "does not exist")
 
 
 def calculate_class_average():

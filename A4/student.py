@@ -3,7 +3,7 @@ class Student:
     Student class.
     """
 
-    def __init__(self, first_name: str, last_name: str, student_number: str, probation: bool, grades: list):
+    def __init__(self, first_name: str, last_name: str, student_number: str, good_standing: bool, grades: list):
         self.__first_name = None
         self.set_first_name(first_name)
 
@@ -13,8 +13,8 @@ class Student:
         self.__student_number = None
         self.__set_student_number(student_number)
 
-        self.__probation = None
-        self.set_probation_status(probation)
+        self.__good_standing = None
+        self.set_good_standing(good_standing)
 
         self.__final_grades = []
         self.set_final_grades(grades)
@@ -23,7 +23,7 @@ class Student:
         return ' '.join((self.__first_name,
                          self.__last_name,
                          self.__student_number,
-                         str(self.__probation),
+                         str(self.__good_standing),
                          ' '.join(str(grade) for grade in self.__final_grades)))
 
     def set_first_name(self, first_name: str):
@@ -57,11 +57,11 @@ class Student:
     def get_student_number(self):
         return self.__student_number
 
-    def set_probation_status(self, probation: bool):
-        self.__probation = probation
+    def set_good_standing(self, good_standing: bool):
+        self.__good_standing = good_standing
 
-    def get_probation_status(self):
-        return self.__probation
+    def is_good_standing(self):
+        return self.__good_standing
 
     def add_final_grade(self, final_grade):
         if not(type(final_grade) == float or type(final_grade) == int):
