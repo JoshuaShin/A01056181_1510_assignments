@@ -13,7 +13,6 @@ from student import Student
 
 def file_delete_student(student_number):
     deleted = False
-
     if len(student_number) == 9:
         with open("students.txt", "r+") as file_object:
             lines = file_object.readlines()
@@ -23,13 +22,18 @@ def file_delete_student(student_number):
                     file_object.write(line)
                 else:
                     deleted = True
-
     return deleted
 
 
 def file_append_student(new_student):
     with open("students.txt", "a") as file_object:
         file_object.write(str(new_student) + '\n')
+
+
+def file_write(students):
+    with open("students.txt", "w") as file_object:
+        for student in students:
+            file_object.write(str(student) + '\n')
 
 
 def file_read():
@@ -55,7 +59,7 @@ def string_to_student(line: str):
     if len(student_info) == 4:
         grades = []
     else:
-        grades = [int(grade) for grade in student_info[4:]]
+        grades = [float(grade) for grade in student_info[4:]]
     return Student(first_name, last_name, student_number, good_standing, grades)
 
 
@@ -65,7 +69,7 @@ def add_student():
     last_name = input("Input last name: ")
     student_number = input("Input student number: ")
     good_standing = "False"  # input("Input good_standing status: ")
-    grades = "1 2 3 4 5"
+    grades = "1 2 3 4 5"   # TODO: UNFINISHED
 
     try:
         student_instance = string_to_student(' '.join((first_name, last_name, student_number, good_standing, grades)))
@@ -74,7 +78,25 @@ def add_student():
     else:
         file_append_student(student_instance)
         # print(student_instance)
-        print("Student successfully added")
+        print("Student added successfully")
+
+
+def add_grade():
+    print("===== Add grade =====")
+    student_number = input("Student number: ").strip().title()
+    students = file_read()
+    for student in students:
+        if student.get_student_number() == student_number:
+            grade = input("Grade: ")
+            try:
+                student.add_final_grade(float(grade))
+            except ValueError:
+                print("Invalid grade")
+                return
+            file_write(students)
+            print("Grade added successfully")
+            return
+    print(student_number, "does not exist")
 
 
 def delete_student():
@@ -91,8 +113,11 @@ def delete_student():
 def calculate_class_average():
     print("===== Calculate Class Average =====")
     students = file_read()
-    print("Class average:"
-          , sum((student.get_gpa() for student in students if student.get_gpa() is not None)) / len(students))
+    try:
+        print("Class average:"
+              , sum((student.get_gpa() for student in students if student.get_gpa() is not None)) / len(students))
+    except ZeroDivisionError:
+        print("Database is empty")
     # TODO: IS THIS CORRECT GPA CALCULATION?
 
 
@@ -116,12 +141,14 @@ def execute_command(user_input: int):
     if user_input == 1:
         add_student()
     elif user_input == 2:
-        delete_student()
+        add_grade()
     elif user_input == 3:
-        calculate_class_average()
+        delete_student()
     elif user_input == 4:
-        print_class_list()
+        calculate_class_average()
     elif user_input == 5:
+        print_class_list()
+    elif user_input == 6:
         quit_program()
     else:
         raise ValueError
@@ -132,10 +159,11 @@ def main():
         try:
             execute_command(int(input("===== Enter Command =====\n"
                                       "1. Add student\n"
-                                      "2. Delete student\n"
-                                      "3. Calculate class average\n"
-                                      "4. Print class list\n"
-                                      "5. Quit\n"
+                                      "2. Add grade\n"
+                                      "3. Delete student\n"
+                                      "4. Calculate class average\n"
+                                      "5. Print class list\n"
+                                      "6. Quit\n"
                                       ">>> ")))
         except ValueError:
             print("Invalid command")
