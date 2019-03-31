@@ -17,7 +17,7 @@ class Student:
         self.set_probation_status(probation)
 
         self.__final_grades = []
-        self.set_final_grade(grades)
+        self.set_final_grades(grades)
 
     def __str__(self):
         return ' '.join((self.__first_name,
@@ -71,9 +71,15 @@ class Student:
         else:
             self.__final_grades.append(round(final_grade, 2))
 
-    def set_final_grade(self, final_grades: list):
+    def set_final_grades(self, final_grades: list):
         for final_grade in final_grades:
             self.add_final_grade(final_grade)
 
-    def get_final_grade(self):
+    def get_final_grades(self):
         return self.__final_grades
+
+    def get_gpa(self):
+        if self.__final_grades:
+            return sum(self.__final_grades) / len(self.__final_grades)
+        else:
+            return None

@@ -8,7 +8,7 @@ Student Management System can be used to create, read, update and delete student
 # A01056181
 # Mar 1st 2019
 
-import student
+from student import Student
 
 
 def file_write(new_student):
@@ -40,7 +40,7 @@ def string_to_student(line: str):
         grades = []
     else:
         grades = [int(grade) for grade in student_info[4:]]
-    return student.Student(first_name, last_name, student_number, probation, grades)
+    return Student(first_name, last_name, student_number, probation, grades)
 
 
 def add_student():
@@ -50,9 +50,7 @@ def add_student():
     student_number = input("Input student number: ")
     probation = "False"  # input("Input probation status: ")
     grades = "1 2 3 4 5"
-
     try:
-        print(' '.join((first_name, last_name, student_number, probation, grades)))
         student_instance = string_to_student(' '.join((first_name, last_name, student_number, probation, grades)))
     except ValueError as e:
         print("ERROR:", e)
@@ -68,6 +66,10 @@ def delete_student():
 
 def calculate_class_average():
     print("===== Calculate Class Average =====")
+    students = file_read()
+    print("Class average:"
+          , sum((student.get_gpa() for student in students if student.get_gpa() is not None)) / len(students))
+    # TODO: IS THIS CORRECT GPA CALCULATION?
 
 
 def print_class_list():
@@ -95,24 +97,24 @@ def execute_command(user_input: int):
         calculate_class_average()
     elif user_input == 4:
         print_class_list()
-    else:
+    elif user_input == 5:
         quit_program()
+    else:
+        raise ValueError
 
 
 def main():
     while True:
         try:
-            user_input = int(input("===== Enter Command =====\n"
-                                   "1. Add student\n"
-                                   "2. Delete student\n"
-                                   "3. Calculate class average\n"
-                                   "4. Print class list\n"
-                                   "5. Quit\n"
-                                   ">>> "))
+            execute_command(int(input("===== Enter Command =====\n"
+                                      "1. Add student\n"
+                                      "2. Delete student\n"
+                                      "3. Calculate class average\n"
+                                      "4. Print class list\n"
+                                      "5. Quit\n"
+                                      ">>> ")))
         except ValueError:
             print("Invalid command")
-        else:
-            execute_command(user_input)
 
 
 if __name__ == "__main__":
