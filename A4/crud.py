@@ -52,10 +52,7 @@ def string_to_student(line: str):
     first_name = student_info[0]
     last_name = student_info[1]
     student_number = student_info[2]
-    if student_info[3] == "True":
-        good_standing = True
-    else:
-        good_standing = False
+    good_standing = student_info[3]
     if len(student_info) == 4:
         grades = []
     else:
@@ -63,16 +60,23 @@ def string_to_student(line: str):
     return Student(first_name, last_name, student_number, good_standing, grades)
 
 
+def input_student():
+    first_name = input("Input first name (eg. Joshua): ").strip()
+    if first_name == "":
+        raise ValueError("name cannot be whitespace or blank")
+    last_name = input("Input last name (eg. Shin): ").strip()
+    if last_name == "":
+        raise ValueError("name cannot be whitespace or blank")
+    student_number = input("Input student number (eg. A12345678): ")
+    good_standing = input("Input good standing status (eg. True or False): ").title()
+    grades = input("Input grades separated by a space (eg. 70 80 90)")
+    return ' '.join((first_name, last_name, student_number, good_standing, grades))
+
+
 def add_student():
     print("===== Add Student =====")
-    first_name = input("Input first name: ")
-    last_name = input("Input last name: ")
-    student_number = input("Input student number: ")
-    good_standing = "False"  # input("Input good_standing status: ")
-    grades = "1 2 3 4 5"   # TODO: UNFINISHED
-
     try:
-        student_instance = string_to_student(' '.join((first_name, last_name, student_number, good_standing, grades)))
+        student_instance = string_to_student(input_student())
     except ValueError as e:
         print("ERROR:", e)
     else:

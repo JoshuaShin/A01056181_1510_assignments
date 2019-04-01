@@ -3,7 +3,7 @@ class Student:
     Student class.
     """
 
-    def __init__(self, first_name: str, last_name: str, student_number: str, good_standing: bool, grades: list):
+    def __init__(self, first_name: str, last_name: str, student_number: str, good_standing: str, grades: list):
         self.__first_name = None
         self.set_first_name(first_name)
 
@@ -27,7 +27,7 @@ class Student:
                          ' '.join(str(grade) for grade in self.__final_grades)))
 
     def set_first_name(self, first_name: str):
-        if len(first_name.strip()) == 0:  # TODO: CHECK IS ALPHA?
+        if len(first_name.strip()) == 0:
             raise ValueError("name cannot be whitespace or blank")
         else:
             self.__first_name = first_name.title()
@@ -36,7 +36,7 @@ class Student:
         return self.__first_name
 
     def set_last_name(self, last_name: str):
-        if len(last_name.strip()) == 0:  # TODO: CHECK IS ALPHA?
+        if len(last_name.strip()) == 0:
             raise ValueError("name cannot be whitespace or blank")
         else:
             self.__last_name = last_name.title()
@@ -57,8 +57,13 @@ class Student:
     def get_student_number(self):
         return self.__student_number
 
-    def set_good_standing(self, good_standing: bool):
-        self.__good_standing = good_standing
+    def set_good_standing(self, good_standing: str):
+        if good_standing.strip().title() == "True":
+            self.__good_standing = True
+        elif good_standing.strip().title() == "False":
+            self.__good_standing = False
+        else:
+            raise ValueError("good standing must be 'True' or 'False'")
 
     def is_good_standing(self):
         return self.__good_standing
