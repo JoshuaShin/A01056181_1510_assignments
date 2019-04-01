@@ -11,6 +11,14 @@ Student Management System can be used to create, read, update and delete student
 from student import Student
 
 
+def is_student_number_duplicate(student_number):
+    if len(student_number) == 9:
+        with open("students.txt") as file_object:
+            if student_number in file_object.read():
+                return True
+    return False
+
+
 def file_delete_student(student_number):
     deleted = False
     if len(student_number) == 9:
@@ -67,7 +75,9 @@ def input_student():
     last_name = input("Input last name (eg. Shin): ").strip()
     if last_name == "":
         raise ValueError("name cannot be whitespace or blank")
-    student_number = input("Input student number (eg. A12345678): ")
+    student_number = input("Input student number (eg. A12345678): ").title()
+    if is_student_number_duplicate(student_number):
+        raise ValueError("student number already exist")
     good_standing = input("Input good standing status (eg. True or False): ").title()
     grades = input("Input grades separated by a space (eg. 70 80 90)")
     return ' '.join((first_name, last_name, student_number, good_standing, grades))
@@ -81,7 +91,6 @@ def add_student():
         print("ERROR:", e)
     else:
         file_append_student(student_instance)
-        # print(student_instance)
         print("Student added successfully")
 
 
@@ -124,7 +133,7 @@ def calculate_class_average():
             total_grades += student.get_gpa()
             total_students += 1
     try:
-        print("Class average:", total_grades / total_students)
+        print("Class average:", round(total_grades / total_students, 2))
     except ZeroDivisionError:
         print("Database is empty")
 
