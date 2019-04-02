@@ -209,15 +209,15 @@ def print_class_list():
     POST-CONDITION the Student objects stored in student.txt are printed
     """
     print("===== Print Class List =====")
-    print("FIRST NAME     LAST NAME      STUDENT NUMBER      STANDING       GRADES")
+    print("FIRST NAME          LAST NAME           STUDENT NUMBER      GOOD STANDING       GRADES")
     students = file_read()
     if students:
         for student in students:
             student_info = str(student).split()
-            print(student_info[0], end=' ' * (15 - len(student_info[0])))
-            print(student_info[1], end=' ' * (15 - len(student_info[1])))
+            print(student_info[0], end=' ' * (20 - len(student_info[0])))
+            print(student_info[1], end=' ' * (20 - len(student_info[1])))
             print(student_info[2], end=' ' * (20 - len(student_info[2])))
-            print(student_info[3], end=' ' * (15 - len(student_info[3])))
+            print(student_info[3], end=' ' * (20 - len(student_info[3])))
             print(' / '.join(str(grade) for grade in student_info[4:]))
     else:
         print("Database is empty")

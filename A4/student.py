@@ -169,6 +169,7 @@ class Student:
         Return the GPA of Student object.
 
         RETURN GPA of Student object
+        RETURN None if student has no grades
         """
         if self.__final_grades:
             return sum(self.__final_grades) / len(self.__final_grades)
