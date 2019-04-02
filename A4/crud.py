@@ -104,25 +104,25 @@ def string_to_student(line: str) -> Student:
     return Student(first_name, last_name, student_number, good_standing, grades)
 
 
-def input_student() -> str:
+def create_student() -> Student:
     """
-    Aggregate user input to construct a string representation of Student object.
+    Aggregate user input to construct Student object.
 
     POST-CONDITION ValueError is raised if user input is invalid
-    RETURN string representation of Student object
+    RETURN Student object of user input
     """
     first_name = input("Input first name (eg. Joshua): ").strip()
-    if first_name == "":
-        raise ValueError("name cannot be whitespace or blank")
     last_name = input("Input last name (eg. Shin): ").strip()
-    if last_name == "":
-        raise ValueError("name cannot be whitespace or blank")
     student_number = input("Input student number (eg. A12345678): ").title()
     if is_student_number_duplicate(student_number):
         raise ValueError("student number already exist")
     good_standing = input("Input good standing status (eg. True or False): ").title()
     grades = input("Input grades separated by a space (eg. 70 80 90): ")
-    return ' '.join((first_name, last_name, student_number, good_standing, grades))
+    try:
+        grades = [float(grade) for grade in grades.split()]
+    except ValueError:
+        raise ValueError("invalid grades")
+    return Student(first_name, last_name, student_number, good_standing, grades)
 
 
 def add_student():
@@ -134,7 +134,7 @@ def add_student():
     """
     print("===== Add Student =====")
     try:
-        student_instance = string_to_student(input_student())
+        student_instance = create_student()
     except ValueError as e:
         print("ERROR:", e)
     else:
