@@ -1,9 +1,28 @@
+"""
+student.py
+
+Student class.
+"""
+
+# Joshua Shin
+# A01056181
+# Mar 1st 2019
+
+
 class Student:
     """
-    Student class.
+    Student class
+
+    Represent a student with first name, last name, student number, academic standing, and list of grades.
     """
 
     def __init__(self, first_name: str, last_name: str, student_number: str, good_standing: str, grades: list):
+        """
+        Initialize student object
+
+        POST CONDITION: Initialize student object
+        """
+
         self.__first_name = None
         self.set_first_name(first_name)
 
@@ -19,7 +38,7 @@ class Student:
         self.__final_grades = []
         self.set_final_grades(grades)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return ' '.join((self.__first_name,
                          self.__last_name,
                          self.__student_number,
@@ -34,7 +53,7 @@ class Student:
         else:
             self.__first_name = first_name.title()
 
-    def get_first_name(self):
+    def get_first_name(self) -> str:
         return self.__first_name
 
     def set_last_name(self, last_name: str):
@@ -45,7 +64,7 @@ class Student:
         else:
             self.__last_name = last_name.title()
 
-    def get_last_name(self):
+    def get_last_name(self) -> str:
         return self.__last_name
 
     def __set_student_number(self, student_number):
@@ -58,7 +77,7 @@ class Student:
         else:
             self.__student_number = student_number.title()
 
-    def get_student_number(self):
+    def get_student_number(self) -> str:
         return self.__student_number
 
     def set_good_standing(self, good_standing: str):
@@ -69,7 +88,7 @@ class Student:
         else:
             raise ValueError("good standing must be 'True' or 'False'")
 
-    def is_good_standing(self):
+    def is_good_standing(self) -> bool:
         return self.__good_standing
 
     def add_final_grade(self, final_grade):
@@ -84,7 +103,7 @@ class Student:
         for final_grade in final_grades:
             self.add_final_grade(final_grade)
 
-    def get_final_grades(self):
+    def get_final_grades(self) -> list:
         return self.__final_grades
 
     def get_gpa(self):

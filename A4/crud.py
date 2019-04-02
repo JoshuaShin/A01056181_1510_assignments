@@ -11,7 +11,7 @@ Student Management System can be used to create, read, update and delete student
 from student import Student
 
 
-def is_student_number_duplicate(student_number):
+def is_student_number_duplicate(student_number: str) -> bool:
     if len(student_number) == 9:
         with open("students.txt") as file_object:
             if student_number in file_object.read():
@@ -19,7 +19,7 @@ def is_student_number_duplicate(student_number):
     return False
 
 
-def file_delete_student(student_number):
+def file_delete_student(student_number: str) -> bool:
     deleted = False
     if len(student_number) == 9:
         with open("students.txt", "r+") as file_object:
@@ -33,18 +33,18 @@ def file_delete_student(student_number):
     return deleted
 
 
-def file_append_student(new_student):
+def file_append_student(student: Student):
     with open("students.txt", "a") as file_object:
-        file_object.write(str(new_student) + '\n')
+        file_object.write(str(student) + '\n')
 
 
-def file_write(students):
+def file_write(students: list):
     with open("students.txt", "w") as file_object:
         for student in students:
             file_object.write(str(student) + '\n')
 
 
-def file_read():
+def file_read() -> list:
     try:
         with open("students.txt") as file_object:
             student_list = []
@@ -55,7 +55,7 @@ def file_read():
         return []
 
 
-def string_to_student(line: str):
+def string_to_student(line: str) -> Student:
     student_info = line.split()
     first_name = student_info[0]
     last_name = student_info[1]
@@ -68,7 +68,7 @@ def string_to_student(line: str):
     return Student(first_name, last_name, student_number, good_standing, grades)
 
 
-def input_student():
+def input_student() -> str:
     first_name = input("Input first name (eg. Joshua): ").strip()
     if first_name == "":
         raise ValueError("name cannot be whitespace or blank")
