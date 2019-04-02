@@ -19,9 +19,12 @@ def is_student_number_duplicate(student_number: str) -> bool:
     RETURN False if student number does not exist.
     """
     if len(student_number) == 9:
-        with open("students.txt") as file_object:
-            if student_number in file_object.read():
-                return True
+        try:
+            with open("students.txt") as file_object:
+                if student_number.title() in file_object.read():
+                    return True
+        except FileNotFoundError:
+            pass
     return False
 
 
@@ -38,7 +41,7 @@ def file_delete_student(student_number: str) -> bool:
             lines = file_object.readlines()
             file_object.truncate(0)
             for line in lines:
-                if student_number + ' ' not in line:
+                if student_number.title() + ' ' not in line:
                     file_object.write(line)
                 else:
                     deleted = True
@@ -204,9 +207,8 @@ def print_class_list():
 
     POST-CONDITION the Student objects stored in student.txt are printed
     """
-    # print(*file_read(), sep='\n')
     print("===== Print Class List =====")
-    print("\nFIRST NAME     LAST NAME      STUDENT NUMBER      STANDING       GRADES")
+    print("FIRST NAME     LAST NAME      STUDENT NUMBER      STANDING       GRADES")
     students = file_read()
     if students:
         for student in students:
@@ -216,7 +218,6 @@ def print_class_list():
             print(student_info[2], end=' ' * (20 - len(student_info[2])))
             print(student_info[3], end=' ' * (15 - len(student_info[3])))
             print(' / '.join(str(grade) for grade in student_info[4:]))
-        print()
     else:
         print("Database is empty")
 
