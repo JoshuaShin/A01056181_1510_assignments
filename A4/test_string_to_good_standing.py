@@ -14,5 +14,3 @@ class TestStringToGoodStanding(TestCase):
     def test_string_to_good_standing_invalid(self):
         with self.assertRaises(ValueError):
             crud.string_to_good_standing("invalid input")
-
-
