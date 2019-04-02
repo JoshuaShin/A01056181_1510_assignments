@@ -117,7 +117,7 @@ def input_student() -> str:
     if is_student_number_duplicate(student_number):
         raise ValueError("student number already exist")
     good_standing = input("Input good standing status (eg. True or False): ").title()
-    grades = input("Input grades separated by a space (eg. 70 80 90)")
+    grades = input("Input grades separated by a space (eg. 70 80 90): ")
     return ' '.join((first_name, last_name, student_number, good_standing, grades))
 
 
@@ -198,14 +198,27 @@ def calculate_class_average():
         print("Database is empty")
 
 
-def print_class_list():  # TODO: make this better pls. also, database is empty warning?
+def print_class_list():
     """
     Print the Student objects stored in student.txt.
 
     POST-CONDITION the Student objects stored in student.txt are printed
     """
+    # print(*file_read(), sep='\n')
     print("===== Print Class List =====")
-    print(*file_read(), sep='\n')
+    print("\nFIRST NAME     LAST NAME      STUDENT NUMBER      STANDING       GRADES")
+    students = file_read()
+    if students:
+        for student in students:
+            student_info = str(student).split()
+            print(student_info[0], end=' ' * (15 - len(student_info[0])))
+            print(student_info[1], end=' ' * (15 - len(student_info[1])))
+            print(student_info[2], end=' ' * (20 - len(student_info[2])))
+            print(student_info[3], end=' ' * (15 - len(student_info[3])))
+            print(' / '.join(str(grade) for grade in student_info[4:]))
+        print()
+    else:
+        print("Database is empty")
 
 
 def quit_program():
