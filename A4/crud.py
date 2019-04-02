@@ -1,17 +1,23 @@
 """
 crud.py
 
-Student Management System can be used to create, read, update and delete student data into student.txt
+Student Management System can be used to create, read, update and delete student data into students.txt.
 """
 
 # Joshua Shin
 # A01056181
-# Mar 1st 2019
+# Mar 31st 2019
 
 from student import Student
 
 
 def is_student_number_duplicate(student_number: str) -> bool:
+    """
+    Check if student number exists in students.txt.
+
+    RETURN True if student number exists.
+    RETURN False if student number does not exist.
+    """
     if len(student_number) == 9:
         with open("students.txt") as file_object:
             if student_number in file_object.read():
@@ -20,6 +26,12 @@ def is_student_number_duplicate(student_number: str) -> bool:
 
 
 def file_delete_student(student_number: str) -> bool:
+    """
+    Delete string representation of Student from students.txt.
+
+    RETURN True if student is deleted.
+    RETURN False if student is not deleted.
+    """
     deleted = False
     if len(student_number) == 9:
         with open("students.txt", "r+") as file_object:
@@ -34,17 +46,32 @@ def file_delete_student(student_number: str) -> bool:
 
 
 def file_append_student(student: Student):
+    """
+    Add Student object to students.txt in string representation.
+
+    POST-CONDITION Student object is added to students.txt
+    """
     with open("students.txt", "a") as file_object:
         file_object.write(str(student) + '\n')
 
 
 def file_write(students: list):
+    """
+    Add list of Student objects to students.txt in string representations.
+
+    POST-CONDITION Student objects are added to students.txt
+    """
     with open("students.txt", "w") as file_object:
         for student in students:
             file_object.write(str(student) + '\n')
 
 
 def file_read() -> list:
+    """
+    Read and return Student objects saved in students.txt.
+
+    RETURN list of Student objects saved in students.txt
+    """
     try:
         with open("students.txt") as file_object:
             student_list = []
@@ -56,6 +83,11 @@ def file_read() -> list:
 
 
 def string_to_student(line: str) -> Student:
+    """
+    Translate string representation of Student into Student object.
+
+    RETURN translated Student object
+    """
     student_info = line.split()
     first_name = student_info[0]
     last_name = student_info[1]
@@ -69,6 +101,12 @@ def string_to_student(line: str) -> Student:
 
 
 def input_student() -> str:
+    """
+    Aggregate user input to construct a string representation of Student object.
+
+    POST-CONDITION ValueError is raised if user input is invalid
+    RETURN string representation of Student object
+    """
     first_name = input("Input first name (eg. Joshua): ").strip()
     if first_name == "":
         raise ValueError("name cannot be whitespace or blank")
@@ -84,6 +122,12 @@ def input_student() -> str:
 
 
 def add_student():
+    """
+    Add a string representation of Student object to student.txt according to user input.
+
+    POST-CONDITION ValueError is raised if given information is invalid
+    POST-CONDITION string representation of Student object is added to student.txt if valid
+    """
     print("===== Add Student =====")
     try:
         student_instance = string_to_student(input_student())
@@ -95,6 +139,12 @@ def add_student():
 
 
 def add_grade():
+    """
+    Add a grade onto the string representation of Student object in student.txt according to user input.
+
+    POST-CONDITION ValueError is raised if user input is invalid
+    POST-CONDITION grade is added onto the string representation of Student object in student.txt
+    """
     print("===== Add grade =====")
     student_number = input("Student number: ").strip().title()
     students = file_read()
@@ -113,6 +163,11 @@ def add_grade():
 
 
 def delete_student():
+    """
+    Delete the string representation of Student object from student.txt according to user input.
+
+    POST-CONDITION string representation of Student object is deleted from student.txt if valid
+    """
     print("===== Delete Student =====")
     student_number = input("Student number: ").strip().title()
     deleted = file_delete_student(student_number)
@@ -124,6 +179,11 @@ def delete_student():
 
 
 def calculate_class_average():
+    """
+    Calculate the class average of the Student objects stored in student.txt.
+
+    POST-CONDITION class average is printed if database is not empty
+    """
     print("===== Calculate Class Average =====")
     students = file_read()
     total_grades = 0
@@ -138,7 +198,12 @@ def calculate_class_average():
         print("Database is empty")
 
 
-def print_class_list():
+def print_class_list():  # TODO: make this better pls. also, database is empty warning?
+    """
+    Print the Student objects stored in student.txt.
+
+    POST-CONDITION the Student objects stored in student.txt are printed
+    """
     print("===== Print Class List =====")
     print(*file_read(), sep='\n')
 
@@ -149,12 +214,17 @@ def quit_program():
 
     POST-CONDITION program terminates
     """
-
     print("===== Program Terminated =====")
     quit()
 
 
 def execute_command(user_input: int):
+    """
+    Execute given user input.
+
+    POST-CONDITION ValueError is raised if user input is invalid
+    POST-CONDITION action corresponding user input is executed if valid
+    """
     if user_input == 1:
         add_student()
     elif user_input == 2:
@@ -172,6 +242,9 @@ def execute_command(user_input: int):
 
 
 def main():
+    """
+    Execute program loop.
+    """
     while True:
         try:
             execute_command(int(input("===== Enter Command =====\n"
