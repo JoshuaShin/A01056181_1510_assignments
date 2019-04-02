@@ -89,6 +89,7 @@ def string_to_student(line: str) -> Student:
     """
     Translate string representation of Student into Student object.
 
+    PRE-CONDITION line representing Student object must be in valid format
     RETURN translated Student object
     """
     student_info = line.split()
