@@ -9,8 +9,8 @@ class TestFileRead(TestCase):
         self.assertEqual(0, len(crud.file_read()))
 
     def test_file_read(self):
-        student_1 = student.Student("test", "test", "t11111111", "True", [])
-        student_2 = student.Student("test", "test", "t22222222", "True", [])
+        student_1 = student.Student("test", "test", "t11111111", True, [])
+        student_2 = student.Student("test", "test", "t22222222", True, [])
 
         crud.file_write([student_1, student_2])
         students = crud.file_read()

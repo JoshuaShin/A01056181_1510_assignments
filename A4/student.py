@@ -15,7 +15,7 @@ class Student:
 
     Represent a student with first name, last name, student number, academic standing, and list of grades.
     """
-    def __init__(self, first_name: str, last_name: str, student_number: str, good_standing: str, grades: list):
+    def __init__(self, first_name: str, last_name: str, student_number: str, in_good_standing: bool, grades: list):
         """
         Initialize student object
 
@@ -30,8 +30,8 @@ class Student:
         self.__student_number = None
         self.__set_student_number(student_number)
 
-        self.__good_standing = None
-        self.set_good_standing(good_standing)
+        self.__in_good_standing = None
+        self.set_in_good_standing(in_good_standing)
 
         self.__final_grades = []
         self.set_final_grades(grades)
@@ -45,7 +45,7 @@ class Student:
         return ' '.join((self.__first_name,
                          self.__last_name,
                          self.__student_number,
-                         str(self.__good_standing),
+                         str(self.__in_good_standing),
                          ' '.join(str(grade) for grade in self.__final_grades)))
 
     def set_first_name(self, first_name: str):
@@ -116,13 +116,20 @@ class Student:
         """
         return self.__student_number
 
-    def set_good_standing(self, good_standing: str):
-        if good_standing.strip().title() == "True":
-            self.__good_standing = True
-        elif good_standing.strip().title() == "False":
-            self.__good_standing = False
-        else:
-            raise ValueError("good standing must be 'True' or 'False'")
+    def set_in_good_standing(self, in_good_standing: bool):
+        """
+        Set in good standing status of Student object.
+
+        POST-CONDITION in good standing status is set
+        """
+        self.__in_good_standing = in_good_standing
+
+        # if in_good_standing.strip().title() == "True":
+        #     self.__in_good_standing = True
+        # elif in_good_standing.strip().title() == "False":
+        #     self.__in_good_standing = False
+        # else:
+        #     raise ValueError("good standing must be 'True' or 'False'")
 
     def is_good_standing(self) -> bool:
         """
@@ -130,7 +137,7 @@ class Student:
 
         RETURN academic standing of Student object
         """
-        return self.__good_standing
+        return self.__in_good_standing
 
     def add_final_grade(self, final_grade):
         """

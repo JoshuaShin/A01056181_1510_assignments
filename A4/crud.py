@@ -85,6 +85,21 @@ def file_read() -> list:
         return []
 
 
+def string_to_good_standing(standing: str) -> bool:
+    """
+    Translate strings true or false into boolean.
+
+    POST-CONDITION ValueError is raised if standing is not 'True' or 'False'
+    RETURN translated boolean
+    """
+    if standing.strip().title() == "True":
+        return True
+    elif standing.strip().title() == "False":
+        return False
+    else:
+        raise ValueError("good standing must be 'True' or 'False'")
+
+
 def string_to_student(line: str) -> Student:
     """
     Translate string representation of Student into Student object.
@@ -96,12 +111,12 @@ def string_to_student(line: str) -> Student:
     first_name = student_info[0]
     last_name = student_info[1]
     student_number = student_info[2]
-    good_standing = student_info[3]
+    in_good_standing = string_to_good_standing(student_info[3])
     if len(student_info) == 4:
         grades = []
     else:
         grades = [float(grade) for grade in student_info[4:]]
-    return Student(first_name, last_name, student_number, good_standing, grades)
+    return Student(first_name, last_name, student_number, in_good_standing, grades)
 
 
 def create_student() -> Student:
@@ -116,7 +131,7 @@ def create_student() -> Student:
     student_number = input("Input student number (eg. A12345678): ").title()
     if is_student_number_duplicate(student_number):
         raise ValueError("student number already exist")
-    good_standing = input("Input good standing status (eg. True or False): ").title()
+    good_standing = string_to_good_standing(input("Input good standing status (eg. True or False): ").title())
     grades = input("Input grades separated by a space (eg. 70 80 90): ")
     try:
         grades = [float(grade) for grade in grades.split()]
@@ -209,9 +224,9 @@ def print_class_list():
     POST-CONDITION the Student objects stored in student.txt are printed
     """
     print("===== Print Class List =====")
-    print("FIRST NAME          LAST NAME           STUDENT NUMBER      GOOD STANDING       GRADES")
     students = file_read()
     if students:
+        print("FIRST NAME          LAST NAME           STUDENT NUMBER      GOOD STANDING       GRADES")
         for student in students:
             student_info = str(student).split()
             print(student_info[0], end=' ' * (20 - len(student_info[0])))
