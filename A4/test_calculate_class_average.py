@@ -9,7 +9,7 @@ class TestCalculateClassAverage(TestCase):
     def test_calculate_class_average_empty_database(self, mock_stdout):
         crud.file_write([])
         crud.calculate_class_average()
-        self.assertTrue("Database is empty", mock_stdout.getvalue())
+        self.assertTrue("No available grades" in mock_stdout.getvalue())
 
     @patch('builtins.input', side_effect=["test", "test", "t12345678", "True", ""])
     @patch('sys.stdout', new_callable=io.StringIO)
@@ -17,7 +17,7 @@ class TestCalculateClassAverage(TestCase):
         crud.file_write([])
         crud.add_student()
         crud.calculate_class_average()
-        self.assertTrue("No available grades", mock_stdout.getvalue())
+        self.assertTrue("No available grades" in mock_stdout.getvalue())
         crud.file_write([])
 
     @patch('builtins.input', side_effect=["test", "test", "t12345678", "True", "",
@@ -31,7 +31,4 @@ class TestCalculateClassAverage(TestCase):
         crud.add_student()
         crud.calculate_class_average()
         self.assertTrue("15", mock_stdout.getvalue())
-
-
-
-
+        crud.file_write([])
