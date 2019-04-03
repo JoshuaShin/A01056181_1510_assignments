@@ -214,7 +214,7 @@ def calculate_class_average():
     try:
         print("Class average:", round(total_grades / total_students, 2))
     except ZeroDivisionError:
-        print("Database is empty")
+        print("No available grades")
 
 
 def print_class_list():
