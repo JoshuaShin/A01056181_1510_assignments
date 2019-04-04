@@ -31,7 +31,7 @@ class Student:
         self.__set_student_number(student_number)
 
         self.__in_good_standing = None
-        self.set_is_in_good_standing(in_good_standing)
+        self.set_in_good_standing(in_good_standing)
 
         self.__final_grades = []
         self.set_final_grades(grades)
@@ -116,7 +116,7 @@ class Student:
         """
         return self.__student_number
 
-    def set_is_in_good_standing(self, in_good_standing: bool):
+    def set_in_good_standing(self, in_good_standing: bool):
         """
         Set in good standing status of Student object.
 
