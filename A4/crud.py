@@ -197,12 +197,14 @@ def delete_student():
     """
     print("===== Delete Student =====")
     student_number = input("Student number: ").strip().title()
-    deleted = file_delete_student(student_number)
-
-    if deleted:
-        print(student_number, "deleted from database")
-    else:
-        print(student_number, "does not exist")
+    students = file_read()
+    for student in students:
+        if student.get_student_number() == student_number:
+            students.remove(student)
+            file_write(students)
+            print(student_number, "deleted from database")
+            return
+    print(student_number, "does not exist")
 
 
 def calculate_class_average():
