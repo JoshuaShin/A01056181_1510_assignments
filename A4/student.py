@@ -124,13 +124,6 @@ class Student:
         """
         self.__in_good_standing = in_good_standing
 
-        # if in_good_standing.strip().title() == "True":
-        #     self.__in_good_standing = True
-        # elif in_good_standing.strip().title() == "False":
-        #     self.__in_good_standing = False
-        # else:
-        #     raise ValueError("good standing must be 'True' or 'False'")
-
     def is_in_good_standing(self) -> bool:
         """
         Return the academic standing of Student object.
