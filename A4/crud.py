@@ -4,10 +4,13 @@ crud.py
 Student Management System can be used to create, read, update and delete student data into students.txt.
 """
 
+
 # Joshua Shin
 # A01056181
 # Mar 31st 2019
 
+
+import doctest
 from student import Student
 
 
@@ -91,6 +94,11 @@ def string_to_good_standing(standing: str) -> bool:
 
     POST-CONDITION ValueError is raised if standing is not 'True' or 'False'
     RETURN translated boolean
+
+    >>> string_to_good_standing("True")
+    True
+    >>> string_to_good_standing("False")
+    False
     """
     if standing.strip().title() == "True":
         return True
@@ -275,6 +283,7 @@ def main():
     """
     Execute program loop.
     """
+    doctest.testmod()
     while True:
         try:
             execute_command(int(input("===== Enter Command =====\n"
