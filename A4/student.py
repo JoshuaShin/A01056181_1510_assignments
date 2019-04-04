@@ -31,7 +31,7 @@ class Student:
         self.__set_student_number(student_number)
 
         self.__in_good_standing = None
-        self.set_in_good_standing(in_good_standing)
+        self.set_is_in_good_standing(in_good_standing)
 
         self.__final_grades = []
         self.set_final_grades(grades)
@@ -57,8 +57,8 @@ class Student:
         """
         if len(first_name.strip()) == 0:
             raise ValueError("name cannot be whitespace or blank")
-        if not first_name.strip().isalpha():
-            raise ValueError("name must be composed of characters")
+        # if not first_name.strip().isalpha():
+        #     raise ValueError("name must be composed of characters")
         else:
             self.__first_name = first_name.title()
 
@@ -79,8 +79,8 @@ class Student:
         """
         if len(last_name.strip()) == 0:
             raise ValueError("name cannot be whitespace or blank")
-        if not last_name.strip().isalpha():
-            raise ValueError("name must be composed of characters")
+        # if not last_name.strip().isalpha():
+        #     raise ValueError("name must be composed of characters")
         else:
             self.__last_name = last_name.title()
 
@@ -116,7 +116,7 @@ class Student:
         """
         return self.__student_number
 
-    def set_in_good_standing(self, in_good_standing: bool):
+    def set_is_in_good_standing(self, in_good_standing: bool):
         """
         Set in good standing status of Student object.
 
@@ -131,7 +131,7 @@ class Student:
         # else:
         #     raise ValueError("good standing must be 'True' or 'False'")
 
-    def is_good_standing(self) -> bool:
+    def is_in_good_standing(self) -> bool:
         """
         Return the academic standing of Student object.
 
