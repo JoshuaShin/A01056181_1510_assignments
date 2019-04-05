@@ -14,43 +14,6 @@ import doctest
 from student import Student
 
 
-def is_student_number_duplicate(student_number: str) -> bool:
-    """
-    Check if student number exists in students.txt.
-
-    RETURN True if student number exists.
-    RETURN False if student number does not exist.
-    """
-    if len(student_number) == 9:
-        try:
-            with open("students.txt") as file_object:
-                if student_number.title() in file_object.read():
-                    return True
-        except FileNotFoundError:
-            pass
-    return False
-
-
-def file_delete_student(student_number: str) -> bool:
-    """
-    Delete string representation of Student from students.txt.
-
-    RETURN True if student is deleted.
-    RETURN False if student is not deleted.
-    """
-    deleted = False
-    if len(student_number) == 9:
-        with open("students.txt", "r+") as file_object:
-            lines = file_object.readlines()
-            file_object.truncate(0)
-            for line in lines:
-                if student_number.title() + ' ' not in line:
-                    file_object.write(line)
-                else:
-                    deleted = True
-    return deleted
-
-
 def file_append_student(student: Student):
     """
     Add Student object to students.txt in string representation.
@@ -136,9 +99,10 @@ def create_student() -> Student:
     """
     first_name = input("Input first name (eg. Joshua): ").strip()
     last_name = input("Input last name (eg. Shin): ").strip()
-    student_number = input("Input student number (eg. A12345678): ").title()
-    if is_student_number_duplicate(student_number):
-        raise ValueError("student number already exist")
+    student_number = input("Input student number (eg. A12345678): ").strip().title()
+    for student in file_read():
+        if student.get_student_number() == student_number:
+            raise ValueError("student number already exist")
     good_standing = string_to_good_standing(input("Input good standing status (eg. True or False): ").title())
     grades = input("Input grades separated by a space (eg. 70 80 90): ")
     try:

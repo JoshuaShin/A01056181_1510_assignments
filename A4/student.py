@@ -58,8 +58,6 @@ class Student:
         """
         if len(first_name.strip()) == 0:
             raise ValueError("name cannot be whitespace or blank")
-        # if not first_name.strip().isalpha():
-        #     raise ValueError("name must be composed of characters")
         else:
             self.__first_name = first_name.title()
 
@@ -80,8 +78,6 @@ class Student:
         """
         if len(last_name.strip()) == 0:
             raise ValueError("name cannot be whitespace or blank")
-        # if not last_name.strip().isalpha():
-        #     raise ValueError("name must be composed of characters")
         else:
             self.__last_name = last_name.title()
 
