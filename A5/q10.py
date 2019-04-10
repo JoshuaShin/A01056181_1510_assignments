@@ -28,6 +28,11 @@ dictionary = {'jgoodall': {'surname': 'Goodall',
 
 
 def database_shared_headings(outer_dictionary: dict) -> set:
+    """
+    Return the intersecting inner dictionary keys as a set.
+
+    RETURN the intersecting inner dictionary keys as a set
+    """
     return set.intersection(*[{key for key in inner_dictionary.keys()} for inner_dictionary in outer_dictionary.values()])
 
 
