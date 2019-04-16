@@ -27,7 +27,7 @@ def request_astronomy_picture_of_the_day_src() -> str:
     return json.loads(res.text)["hdurl"]
 
 
-def website():
+def website() -> None:
     """
     Build a website with the given name and description and the Astronomy Picture of the Day.
 
