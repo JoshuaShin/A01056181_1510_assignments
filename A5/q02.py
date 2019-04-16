@@ -5,20 +5,20 @@ Calculate greatest common divisor between two numbers.
 """
 
 
-import doctest
-
-
 # Joshua Shin
 # A01056181
 # April 9th 2019
+
+
+import doctest
 
 
 def gcd(a: int, b: int) -> int:
     """
     Calculate greatest common divisor.
 
-    PRECONDITION a must not be 0
-    PRECONDITION B must not be 0
+    PRE-CONDITION a must not be 0
+    PRE-CONDITION b must not be 0
     RETURN greatest common divisor between a and b
 
     >>> gcd(4, 12)

@@ -1,5 +1,7 @@
 """
 q06.py
+
+Build a website using user input and astronomy picture of the day.
 """
 
 
@@ -12,11 +14,11 @@ import requests
 import json
 
 
-def request_astronomy_picture_of_the_day_src():
+def request_astronomy_picture_of_the_day_src() -> str:
     """
     Return the source of Astronomy Picture of the Day.
 
-    RETURN: source of Astronomy Picture of the Day
+    RETURN source of Astronomy Picture of the Day
     """
     url = "https://api.nasa.gov/planetary/apod?api_key=M4115FENjIimy6fhvlebJgYsf4TbCr7eQ75dyenI"
     res = requests.get(url)
@@ -29,7 +31,7 @@ def website():
     """
     Build a website with the given name and description and the Astronomy Picture of the Day.
 
-    POST-CONDITION: index.html is created with name, description and Astronomy Picture of the Day
+    POST-CONDITION index.html is created with name, description and Astronomy Picture of the Day
     """
     with open("index.html", "w") as file_object:
         name = input("Name: ")

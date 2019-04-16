@@ -1,11 +1,16 @@
 """
 q10.py
+
+Find the intersecting inner dictionary keys as a set.
 """
 
 
 # Joshua Shin
 # A01056181
 # April 9th 2019
+
+
+import doctest
 
 
 dictionary = {'jgoodall': {'surname': 'Goodall',
@@ -33,12 +38,14 @@ def database_shared_headings(outer_dictionary: dict) -> set:
 
     RETURN the intersecting inner dictionary keys as a set
     """
-    return set.intersection(*[{key for key in inner_dictionary.keys()} for inner_dictionary in outer_dictionary.values()])
+    return set.intersection(
+        *[{key for key in inner_dictionary.keys()} for inner_dictionary in outer_dictionary.values()])
 
 
 def main():
+    doctest.testmod()
     print(database_shared_headings(dictionary))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
