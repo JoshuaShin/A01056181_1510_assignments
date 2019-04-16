@@ -29,7 +29,7 @@ def sum_of_primes(upperbound: int) -> int:
     1060
     """
     if upperbound < 1:
-        raise ValueError("Must be larger than 0")
+        raise ValueError("Upperbound must be larger than 0.")
     else:
         prime = list(range(upperbound + 1))
         for i in range(2, math.ceil(math.sqrt(upperbound + 1))):

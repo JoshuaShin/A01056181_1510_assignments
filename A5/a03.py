@@ -23,7 +23,7 @@ def backup(file_name: str) -> None:
             with open(file_name.split(".")[0] + ".bak", 'w') as file_object_new:
                 file_object_new.write(content)
     except FileNotFoundError:
-        print("The file does not exist.")
+        print("File does not exist.")
 
 
 def main():

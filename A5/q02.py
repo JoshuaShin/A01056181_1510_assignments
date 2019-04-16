@@ -29,7 +29,7 @@ def gcd(a: int, b: int) -> int:
     12
     """
     if a == 0 and b == 0:
-        raise ValueError("Invalid Inputs")
+        raise ValueError("Invalid Input.")
     elif a % b == 0:
         return abs(b)
     else:

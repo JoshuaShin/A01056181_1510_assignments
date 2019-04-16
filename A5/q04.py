@@ -24,7 +24,7 @@ def selection_sort(numbers: list) -> list:
     [-4, 1, 3, 5, 9]
     """
     if len(numbers) == 0:
-        raise ValueError("Cannot sort empty list!")
+        raise ValueError("List cannot be empty.")
     else:
         numbers_copy = numbers[:]
         for i in range(len(numbers_copy)):
