@@ -17,6 +17,7 @@ def database_shared_headings(outer_dictionary: dict) -> set:
     """
     Return the intersecting inner dictionary keys as a set.
 
+    PRE-CONDITION must be in valid nested format
     RETURN the intersecting inner dictionary keys as a set
     """
     return set.intersection(

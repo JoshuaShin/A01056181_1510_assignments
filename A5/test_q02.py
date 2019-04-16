@@ -3,10 +3,7 @@ import q02
 
 
 class TestGcd(TestCase):
-    def test_gcd_first_argument_zero(self):
-        self.assertEqual(4, q02.gcd(4, 0))
-
-    def test_gcd_second_argument_zero(self):
+    def test_gcd_argument_zero(self):
         self.assertEqual(12, q02.gcd(0, 12))
 
     def test_gcd_zeroes(self):
